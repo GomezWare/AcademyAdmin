@@ -16,7 +16,7 @@ SQL;
 
 /* Codigo SQL de la tabla students */
 $examSQL = <<<SQL
-CREATE TABLE IF NOT EXISTS exam (
+CREATE TABLE IF NOT EXISTS exams (
     exam_id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INTEGER,
     exam_date DATE,
