@@ -25,3 +25,5 @@ header('Content-Type: application/json');
 
 // Se responde con el JSON
 echo $response;
+
+unset($db);

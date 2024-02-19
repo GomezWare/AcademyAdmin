@@ -35,5 +35,8 @@ try {
     echo "Success";
 } catch (PDOException $e) {
     echo 'Error:' . $e;
+    unset($db);
     die();
 }
+
+unset($db);
