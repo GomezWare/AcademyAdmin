@@ -1,8 +1,5 @@
 <?php
-
-/* En este fichero se incializara la base de datos para su funcinamiento */
-error_reporting(E_ALL);
-
+/* En este script se incializara la base de datos para su funcinamiento */
 /* Conexion PDO */
 $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
 
@@ -28,9 +25,10 @@ CREATE TABLE IF NOT EXISTS exam (
     FOREIGN KEY (student_id) REFERENCES student(student_id)
 );
 SQL;
+/* En el SQL de examenes se realiza un check de la nota de los examenes 
+para que solo se puedan guardar valores de 0 a 10*/
 
-
-// Se ejecutan las queries
+// Se ejecutan las queries y si hay algun error lo muestro por pantalla
 try {
     $db->exec($studentSQL);
     $db->exec($examSQL);
