@@ -47,5 +47,34 @@ class App {
       });
     }
   }
-  buscarAlumno(id) {}
+  buscarAlumno(id) {
+    // Realizar la solicitud Fetch POST
+    fetch("../../php/obtenerAlumno.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "id=" + encodeURIComponent(id),
+    })
+      .then((response) => {
+        // Verificar si la respuesta del servidor
+        if (!response.ok) {
+          throw new Error("Error en la solicitud: " + response.status);
+        }
+        return response.json();
+      })
+      .then((alumnno) => {
+        if (alumnno.student_id == -1) {
+          throw new Error("No se ha encontrado el alumno");
+        } else {
+          this.mostrarDetallesAlumno(alumnno);
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+        console.error("Error al realizar la solicitud:", error);
+      });
+  }
+
+  mostrarDetallesAlumno(alumnno) {}
 }
