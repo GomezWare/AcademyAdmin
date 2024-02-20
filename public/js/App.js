@@ -20,7 +20,6 @@ class App {
             e.student_tel,
             e.student_address
           );
-
           arr.push(alumno);
         });
 
@@ -28,13 +27,25 @@ class App {
         this.mostrarTablaAlumnos();
       })
       .catch((error) => {
-        console.error("Error fetching students:", error);
+        alert(
+          "Ha ocurrido un error en la aplicacion, intentelo de nuevo mas tarde"
+        );
       });
   }
 
   mostrarTablaAlumnos() {
-    this.arrAlumnos.forEach((alumno) => {
-      document.querySelector("#tablaAlumnos").appendChild(alumno.alumnoToRow());
-    });
+    document.querySelector("#listaAlumnos").innerHTML = "";
+
+    if (this.arrAlumnos.length == 0) {
+      document.querySelector("#listaAlumnos").innerHTML =
+        "<tr ><td colspan='4'>No se han encontrado alumnos</td></tr>";
+    } else {
+      this.arrAlumnos.forEach((alumno) => {
+        document
+          .querySelector("#listaAlumnos")
+          .appendChild(alumno.alumnoToRow());
+      });
+    }
   }
+  buscarAlumno(id) {}
 }

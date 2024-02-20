@@ -1,12 +1,5 @@
 "use strict";
-// Functions
-function inicializacion() {
-  let aManager = new App();
-  aManager.obtenerAlumnos();
-  aManager.mostrarTablaAlumnos();
-  return aManager;
-}
+let aManager = new App();
+aManager.obtenerAlumnos();
 
 // Main
-
-let aManager = inicializacion();

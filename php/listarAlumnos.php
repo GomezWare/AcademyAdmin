@@ -20,6 +20,7 @@ foreach ($rows as $row) {
 }
 
 // Se codifica el array en forma de JSON y se establecen las cabeceras de la peticion
+
 $response = json_encode($json);
 header('Content-Type: application/json');
 

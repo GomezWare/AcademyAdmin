@@ -9,13 +9,25 @@
     <script defer src="../js/main.js"></script>
   </head>
   <body>
-    <table border="1" id="tablaAlumnos">
+    <dialog id="dAddAlumno">
+      <form id="formAddAlumno"></form>
+    </dialog>
+    <dialog id="dDatosAlumno">
+      <form id="formDatosAlumno"></form>
+    </dialog>
+    <details>
+      <summary>Listado Parametrizado</summary>
+      <form id="formListParamAlumno"></form>
+    </details>
+    <button id="addAlumno">Añadir Alumno</button>
+    <table border="1">
       <tr>
         <th>ID</th>
         <th>Nombre</th>
         <th>Telefono</th>
         <th>Opciones</th>
       </tr>
+      <tbody id="listaAlumnos"></tbody>
     </table>
   </body>
 </html>
