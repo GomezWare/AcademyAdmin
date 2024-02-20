@@ -4,38 +4,37 @@
 
 class App {
   constructor() {
-    this.arrAlumnos = this.fetchAlumnos();
-    this.arrExamenes = [];
+    this.arrAlumnos = [];
   }
-  fetchAlumnos() {
-    // Realiza una solicitud GET a listarAlumnos.php
+
+  obtenerAlumnos() {
     fetch("../../php/listarAlumnos.php")
-      .then((response) => {
-        // Verifica si la respuesta fue exitosa
-        if (!response.ok) {
-          throw new Error("La solicitud no fue exitosa");
-        }
-        // Parsea la respuesta JSON
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        /* A partir del JSON recibido se instanciaran alumnos que se añadiran al array  */
         let arr = [];
-        data.forEach((a) => {
+        data.forEach((e) => {
           let alumno = new Alumno(
-            a["student_id"],
-            a["student_name"],
-            a["student_bd"],
-            a["student_tel"],
-            a["student_address"]
+            e.student_id,
+            e.student_name,
+            e.student_bd,
+            e.student_tel,
+            e.student_address
           );
-          arr.push(a);
+
+          arr.push(alumno);
         });
-        return arr;
+
+        this.arrAlumnos = arr;
+        this.mostrarTablaAlumnos();
       })
       .catch((error) => {
-        // Maneja errores de red u otras excepciones
-        console.error("Error:", error);
+        console.error("Error fetching students:", error);
       });
+  }
+
+  mostrarTablaAlumnos() {
+    this.arrAlumnos.forEach((alumno) => {
+      document.querySelector("#tablaAlumnos").appendChild(alumno.alumnoToRow());
+    });
   }
 }
