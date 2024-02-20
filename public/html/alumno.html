@@ -6,21 +6,40 @@
     <title>Document</title>
     <script defer src="../js/Alumno.js"></script>
     <script defer src="../js/App.js"></script>
-    <script defer src="../js/main.js"></script>
+    <script defer src="../js/mainAlumno.js"></script>
   </head>
   <body>
     <dialog id="dAddAlumno">
       <form id="formAddAlumno"></form>
     </dialog>
     <dialog id="dDatosAlumno">
-      <form id="formDatosAlumno"></form>
+      <form id="formDatosAlumno">
+        <label for="id">ID: <input type="number" name="id" readonly /></label>
+        <br />
+        <label for="nombre"
+          >Nombre: <input type="text" name="nombre" readonly
+        /></label>
+        <br />
+        <label for="date"
+          >Fecha de nacimiento: <input type="date" name="bd" readonly
+        /></label>
+        <br />
+        <label for="tel"
+          >Telefono: <input type="tel" name="tel" readonly
+        /></label>
+        <br />
+        <label for="addr"
+          >Direccioón: <input type="text" name="addr" readonly
+        /></label>
+      </form>
+      <button id="btnCerrarDetalles">Cerrar</button>
     </dialog>
     <details>
       <summary>Listado Parametrizado</summary>
       <form id="formListParamAlumno"></form>
     </details>
     <button id="addAlumno">Añadir Alumno</button>
-    <table border="1">
+    <table border="1" id="tablaAlumnos">
       <tr>
         <th>ID</th>
         <th>Nombre</th>
