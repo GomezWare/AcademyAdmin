@@ -112,6 +112,48 @@ class App {
       });
   }
 
+  eliminarAlumno(id) {
+    /* Esta funcion elimina a alumno, no tiene callback */
+
+    fetch("../../php/eliminarAlumno.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "id=" + encodeURIComponent(id),
+    })
+      .then((response) => {
+        // Aqui se verifica si el servidor ha respondido
+        if (!response.ok) {
+          throw new Error("server");
+        }
+        // Aqui se devuelve dicho JSON
+        return response.json();
+      })
+      .then((resultado) => {
+        console.log(resultado);
+        if (resultado.estado == "ok") {
+          // TODO TOAST confirmando la eliminacion del alumno
+
+          /*Se refresca la lista de alumnos*/
+          this.obtenerAlumnos();
+        } else {
+          throw new Error("notErased");
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+
+        if (error == "server") {
+          // TODO TOAST con error del servidor
+          console.log("Error servidor");
+        } else {
+          // TODO TOAST con error no se ha podido eliminar el alumno
+          console.log("Error al eliminar");
+        }
+      });
+  }
+
   mostrarDetallesAlumno(alumnno) {
     /* Recibe como parametro un objeto alumno, simplemente va navegando
     por el DOM del formulario ubicado en el DIALOG y le va poniendo sus respectivos valores */
