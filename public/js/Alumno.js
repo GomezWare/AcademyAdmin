@@ -17,7 +17,7 @@ class Alumno {
     let telTd = document.createElement("td");
     let optTd = document.createElement("td");
     optTd.innerHTML = `
-    <button class="detalles">Detalles</button><button class="borrar">Borrar</button><button class="modificar">Modificar</button><button class="calificar">Calificar</button>`;
+    <button name="detalles">Detalles</button><button name="borrar">Borrar</button><button name="modificar">Modificar</button><button name="calificar">Calificar</button>`;
     idTd.innerText = this.id;
     nameTd.innerText = this.name;
     telTd.innerText = this.tel;

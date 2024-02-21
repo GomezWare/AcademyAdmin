@@ -63,11 +63,19 @@ class App {
         }
         return response.json();
       })
-      .then((alumnno) => {
-        if (alumnno.student_id == -1) {
+      .then((JSONAlumno) => {
+        if (JSONAlumno.student_id == -1) {
           throw new Error("No se ha encontrado el alumno");
         } else {
-          this.mostrarDetallesAlumno(alumnno);
+          console.log(JSONAlumno);
+          let alumno = new Alumno(
+            JSONAlumno.student_id,
+            JSONAlumno.student_name,
+            JSONAlumno.student_bd,
+            JSONAlumno.student_tel,
+            JSONAlumno.student_address
+          );
+          this.mostrarDetallesAlumno(alumno);
         }
       })
       .catch((error) => {
@@ -76,5 +84,12 @@ class App {
       });
   }
 
-  mostrarDetallesAlumno(alumnno) {}
+  mostrarDetallesAlumno(alumnno) {
+    let formDetalles = document.forms[1].children;
+    formDetalles[0].children[0].value = alumnno.id;
+    formDetalles[2].children[0].value = alumnno.name;
+    formDetalles[4].children[0].value = alumnno.bd;
+    formDetalles[6].children[0].value = alumnno.tel;
+    formDetalles[8].children[0].value = alumnno.addr;
+  }
 }
