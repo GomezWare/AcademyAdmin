@@ -27,22 +27,22 @@ class Alumno {
     // Tambien se crearan los botones para las funciones principales de la aplicacion
     let optTd = document.createElement("td");
 
-    // A cada boton se le asinara un name luego sera usado en el EventListener de la tabla
+    // A cada boton se le asinara un name y una imagen luego sera usado en el EventListener de la tabla
     let btnDetalles = document.createElement("button");
     btnDetalles.name = "detalles";
-    btnDetalles.innerText = "Detalles";
+    btnDetalles.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/detalles.png' />`;
 
     let btnBorrar = document.createElement("button");
     btnBorrar.name = "borrar";
-    btnBorrar.innerText = "Borrar";
+    btnBorrar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/borrar.png' />`;
 
     let btnModificar = document.createElement("button");
     btnModificar.name = "modificar";
-    btnModificar.innerText = "Modificar";
+    btnModificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/modificar.png' />`;
 
     let btnCalificar = document.createElement("button");
     btnCalificar.name = "calificar";
-    btnCalificar.innerText = "Calificar";
+    btnCalificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/calificacion.png' />`;
 
     // Se añaden los elementos mediante appendChild
     row.appendChild(idTd);

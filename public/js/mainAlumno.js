@@ -43,4 +43,4 @@ document.querySelector("#btnCerrarDetalles").addEventListener("click", () => {
 
 /* Se instancia aManager que es la App principal y se muestran todos los alumnos de la DB*/
 let aManager = new App();
-aManager.obtenerAlumnos();
+aManager.obtenerAlumnos(aManager.mostrarTablaAlumnos);

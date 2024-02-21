@@ -13,6 +13,7 @@
     />
   </head>
   <body>
+    <!-- Dialog para añadir alumnos -->
     <dialog id="dAddAlumno">
       <form id="formAddAlumno">
         <label for="id">ID: <input type="number" name="id" /></label>
@@ -29,6 +30,9 @@
       </form>
       <div id="errores"></div>
     </dialog>
+
+    <!-- Dialog para añadir alumnos -->
+
     <dialog id="dDatosAlumno">
       <form id="formDatosAlumno">
         <label for="id">ID: <input type="number" name="id" readonly /></label>
@@ -51,11 +55,20 @@
       </form>
       <button id="btnCerrarDetalles">Cerrar</button>
     </dialog>
+
+    <!-- Dialog para borrar alumnos -->
+
+    <!-- Parte principal de la pagina -->
+
     <details>
-      <summary>Listado Parametrizado</summary>
+      <summary>
+        <img width="16" src="../img/param.png" /> Listado Parametrizado
+      </summary>
       <form id="formListParamAlumno"></form>
     </details>
-    <button id="addAlumno">Añadir Alumno</button>
+    <button id="addAlumno">
+      <img width="24" src="../img/añadirAlumno.png" /> Añadir Alumno
+    </button>
     <table border="1" id="tablaAlumnos">
       <tr>
         <th>ID</th>
