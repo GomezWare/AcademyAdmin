@@ -1,11 +1,13 @@
 "use strict";
+
+///////////////////////
+// Variables globales
+/////////////////////
+var idAEliminar = -1;
+
 //////////////
 // Functions
 /////////////
-
-function abrirDialogDetalles() {
-  document.querySelector("#dDatosAlumno").showModal();
-}
 
 ///////////
 // Events
@@ -23,17 +25,20 @@ document.querySelector("#tablaAlumnos").addEventListener("click", (e) => {
     );
 
     if (funcion == "detalles") {
-      // Aqui se ejecuta la funcion buscar alumnos con la funcion detalles alumnos y se le pasa el id
+      // Aqui se ejecuta la funcion buscar alumnos con la y se abren los detalles alumnos y se le pasa el id
       aManager.buscarAlumno(id, aManager.mostrarDetallesAlumno);
-      abrirDialogDetalles();
+      document.querySelector("#dDatosAlumno").showModal();
       return;
     }
     if (funcion == "borrar") {
       // Aqui se pone el en dialog el nombre del alumno
       document.querySelector("#alumnoAEliminar").innerHTML =
         e.target.parentElement.parentElement.children[1].textContent;
-      // Para poder seleccionar al alumno a borrar se le añade el id por medio de un atributo xdata
-      document.querySelector("#alumnoAEliminar").setAttribute("idABorrar", id);
+
+      // Se guarda el id del alumno en una variable global
+      idAEliminar = id;
+
+      // Mostrar el dialogo alumnos
       document.querySelector("#dEliminarAlumno").showModal();
       return;
     }
@@ -65,9 +70,7 @@ document
 // Evento por si se decide borrar a un alumno
 document.querySelector("#btnEliminar").addEventListener("click", () => {
   // Se recupera el id desde el xData y este es mandado a la funcion eliminar
-  aManager.eliminarAlumno(
-    document.querySelector("#alumnoAEliminar").getAttribute("idABorrar")
-  );
+  aManager.eliminarAlumno(idAEliminar);
 
   // Una vez se ha completado se cierra la ventana
   document.querySelector("#dEliminarAlumno").close();
