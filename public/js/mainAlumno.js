@@ -15,7 +15,7 @@ document.querySelector("#tablaAlumnos").addEventListener("click", (e) => {
     );
 
     if (funcion == "detalles") {
-      aManager.buscarAlumno(id);
+      aManager.buscarAlumno(id, aManager.mostrarDetallesAlumno);
       abrirDialogDetalles();
       return;
     }
@@ -40,5 +40,7 @@ document.querySelector("#btnCerrarDetalles").addEventListener("click", () => {
 });
 
 // Main
+
+/* Se instancia aManager que es la App principal y se muestran todos los alumnos de la DB*/
 let aManager = new App();
 aManager.obtenerAlumnos();

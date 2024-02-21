@@ -7,10 +7,27 @@
     <script defer src="../js/Alumno.js"></script>
     <script defer src="../js/App.js"></script>
     <script defer src="../js/mainAlumno.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
   </head>
   <body>
     <dialog id="dAddAlumno">
-      <form id="formAddAlumno"></form>
+      <form id="formAddAlumno">
+        <label for="id">ID: <input type="number" name="id" /></label>
+        <br />
+        <label for="nombre">Nombre: <input type="text" name="nombre" /></label>
+        <br />
+        <label for="date"
+          >Fecha de nacimiento: <input type="date" name="bd"
+        /></label>
+        <br />
+        <label for="tel">Telefono: <input type="tel" name="tel" /></label>
+        <br />
+        <label for="addr">Dirección: <input type="text" name="addr" /></label>
+      </form>
+      <div id="errores"></div>
     </dialog>
     <dialog id="dDatosAlumno">
       <form id="formDatosAlumno">
