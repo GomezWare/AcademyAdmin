@@ -23,7 +23,7 @@ class App {
             e.student_tel,
             e.student_address
           );
-          arrAlumnos.push(alumno);  
+          arrAlumnos.push(alumno);
         });
 
         // Este array se pasara a una funcion de callback para que se procesen los datos
@@ -128,7 +128,6 @@ class App {
         return response.json();
       })
       .then((resultado) => {
-        console.log(resultado);
         if (resultado.estado == "ok") {
           // TODO TOAST confirmando la eliminacion del alumno
 
@@ -162,7 +161,6 @@ class App {
     formDetalles[6].children[0].value = alumnno.tel;
     formDetalles[8].children[0].value = alumnno.addr;
   }
-
 
   // DEBUG
   pruebaDeCallback(datos) {
