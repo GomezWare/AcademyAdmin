@@ -3,11 +3,9 @@
 /* La clase App se encarga del control de todas las funciones de la aplicacion*/
 
 class App {
-  constructor() {
-    this.arrAlumnos = [];
-  }
+  constructor() {}
 
-  obtenerAlumnos() {
+  obtenerAlumnos(callback) {
     /* Esta funcion obtiene todos los alumnos de la base de datos,
     Esta funcion se llama al principio de la aplicacion y para 
     actualizar los registros por pantalla */
@@ -15,7 +13,7 @@ class App {
     fetch("../../php/listarAlumnos.php")
       .then((response) => response.json())
       .then((JSONalumnos) => {
-        let arr = [];
+        let arrAlumnos = [];
         // Luego recorre el objeto JSON recibido y va instanciando alumnos y metiendolos en un array
         JSONalumnos.forEach((e) => {
           let alumno = new Alumno(
@@ -25,33 +23,32 @@ class App {
             e.student_tel,
             e.student_address
           );
-          arr.push(alumno);
+          arrAlumnos.push(alumno);  
         });
 
-        // Luego se lo pasa al objeto App y llama a la funcion de callback para mostrarlos por pantalla
-        this.arrAlumnos = arr;
-
+        // Este array se pasara a una funcion de callback para que se procesen los datos
+        // El array es una lista objetos tipo alumno
         // Funcion de callback
-        this.mostrarTablaAlumnos();
+        callback(arrAlumnos);
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
         // TODO TOAST mostrar error de serviodor
-        this.mostrarTablaAlumnos();
+        this.mostrarTablaAlumnos([]);
       });
   }
 
-  mostrarTablaAlumnos() {
+  mostrarTablaAlumnos(arrAlumnos) {
     // Esta funcion borra el cuerpo de la tabla actual y representa a los alumnos
     document.querySelector("#listaAlumnos").innerHTML = "";
 
     // En caso de que no haya alumnos que representar se le hara saber al usuario
-    if (this.arrAlumnos.length == 0) {
+    if (arrAlumnos.length == 0) {
       document.querySelector("#listaAlumnos").innerHTML =
         "<tr ><td colspan='4'>No se han encontrado alumnos</td></tr>";
     } else {
       // Si hay alumnos estos se mostraran por pantalla
-      this.arrAlumnos.forEach((alumno) => {
+      arrAlumnos.forEach((alumno) => {
         /* Para obtener el TR con los datos del alumno y 
         las funciones se hace uso de la fucnion alumnoToRow de la clase Alumno */
         document
@@ -136,7 +133,7 @@ class App {
           // TODO TOAST confirmando la eliminacion del alumno
 
           /*Se refresca la lista de alumnos*/
-          this.obtenerAlumnos();
+          this.obtenerAlumnos(this.mostrarTablaAlumnos);
         } else {
           throw new Error("notErased");
         }
@@ -164,5 +161,12 @@ class App {
     formDetalles[4].children[0].value = alumnno.bd;
     formDetalles[6].children[0].value = alumnno.tel;
     formDetalles[8].children[0].value = alumnno.addr;
+  }
+
+
+  // DEBUG
+  pruebaDeCallback(datos) {
+    console.log("Se ha llegado a la funcion");
+    console.log(datos);
   }
 }
