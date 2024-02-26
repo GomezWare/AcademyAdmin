@@ -76,6 +76,37 @@ document.querySelector("#btnEliminar").addEventListener("click", () => {
   document.querySelector("#dEliminarAlumno").close();
 });
 
+// Evento para cuando se pulsa el boton añadir alumno
+document
+  .querySelector("#btnAbrirDialogAñadirAlumno")
+  .addEventListener("click", () => {
+    document.querySelector("#dAñadirAlumno").showModal();
+  });
+
+// Evento para cuando se pulsa el boton cerrar de el dialog para añadir alumnos
+document.querySelector("#btnAñadirCerrar").addEventListener("click", () => {
+  document.querySelector("#dAñadirAlumno").close();
+});
+
+// Evento por si se decide añadir el alumno en el dialog para añadir lo alumno
+document.querySelector("#btnAñadirAlumno").addEventListener("click", () => {
+  const divErrores = document.querySelector("#DivErroresAñadir");
+  let nombre = String(document.forms[0].children[0].children[0].value);
+  let bd = String(document.forms[0].children[2].children[0].value);
+  let tel = Number(document.forms[0].children[4].children[0].value);
+  let addr = document.forms[0].children[6].children[0].value;
+
+  // TODO Validacion de datos
+
+  if (true) {
+    let al = new Alumno(-1, nombre, bd, tel, addr);
+    aManager.crearAlumno(al);
+    document.querySelector("#dAñadirAlumno").close();
+  } else {
+    // TODO TOAST Decirle al usuario que compruebe los errores
+  }
+});
+
 //////////
 // Main
 /////////

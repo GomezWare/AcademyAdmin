@@ -162,6 +162,38 @@ class App {
     formDetalles[8].children[0].value = alumnno.addr;
   }
 
+  crearAlumno(Alumno) {
+    // Funcion encargadas de añadir un alumno a la DB a partir de un objeto Alumno
+
+    fetch("../../php/crearAlumno.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Alumno),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          // TODO TOAST Error de red
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // TODO Manejar errores
+        if (data["estado"] == "ok") {
+          console.log("me ha llegado el ok");
+          // Se actualiza introduce el alumno a la DB mediante PHP y se actualiza la alumno
+          // TODO TOAST Alumno Añadido
+          this.obtenerAlumnos(this.mostrarTablaAlumnos);
+        } else {
+          // TODO TOAST No se ha podido añadir al alumno
+        }
+      })
+      .catch((error) => {
+        // TODO TOAST No se ha podido añadir al alumno
+      });
+  }
+
   // DEBUG
   pruebaDeCallback(datos) {
     console.log("Se ha llegado a la funcion");

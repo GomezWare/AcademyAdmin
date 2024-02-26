@@ -14,6 +14,8 @@ try {
     /* Conexión PDO */
     $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
 
+    // HACK Arreglar la preparedQuery con un BIND
+
     // Se hace un PreparedQuery y se ejecuta en la BD
     $query = "DELETE FROM students WHERE student_id = :id";
     $stmt = $db->prepare($query);

@@ -14,10 +14,8 @@
   </head>
   <body>
     <!-- Dialog para añadir alumnos -->
-    <dialog id="dAddAlumno">
-      <form id="formAddAlumno">
-        <label for="id">ID: <input type="number" name="id" /></label>
-        <br />
+    <dialog id="dAñadirAlumno">
+      <form id="formAñadirAlumno">
         <label for="nombre">Nombre: <input type="text" name="nombre" /></label>
         <br />
         <label for="date"
@@ -27,11 +25,14 @@
         <label for="tel">Telefono: <input type="tel" name="tel" /></label>
         <br />
         <label for="addr">Dirección: <input type="text" name="addr" /></label>
+        <br>
+        <button type="button" id="btnAñadirAlumno">Añadir Alumno</button>
+        <button type="button" id="btnAñadirCerrar">Cerrar</button>
       </form>
-      <div id="errores"></div>
+      <div id="DivErroresAñadir"></div>
     </dialog>
 
-    <!-- Dialog para añadir alumnos -->
+    <!-- Dialog para ver los detalles de un  alumno -->
 
     <dialog id="dDatosAlumno">
       <form id="formDatosAlumno">
@@ -77,7 +78,7 @@
       </summary>
       <form id="formListParamAlumno"></form>
     </details>
-    <button id="addAlumno">
+    <button id="btnAbrirDialogAñadirAlumno">
       <img width="24" src="../img/añadirAlumno.png" /> Añadir Alumno
     </button>
     <table border="1" id="tablaAlumnos">
