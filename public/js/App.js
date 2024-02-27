@@ -155,11 +155,11 @@ class App {
     por el DOM del formulario ubicado en el DIALOG y le va poniendo sus respectivos valores */
 
     let formDetalles = document.forms[1].children;
-    formDetalles[0].children[0].value = alumnno.id;
-    formDetalles[2].children[0].value = alumnno.name;
-    formDetalles[4].children[0].value = alumnno.bd;
-    formDetalles[6].children[0].value = alumnno.tel;
-    formDetalles[8].children[0].value = alumnno.addr;
+    formDetalles[0].children[0].value = Number(alumnno.id);
+    formDetalles[2].children[0].value = String(alumnno.name);
+    formDetalles[4].children[0].value = String(alumnno.bd);
+    formDetalles[6].children[0].value = Number(alumnno.tel);
+    formDetalles[8].children[0].value = String(alumnno.addr);
   }
 
   crearAlumno(Alumno) {
@@ -179,9 +179,8 @@ class App {
         return response.json();
       })
       .then((data) => {
-        // TODO Manejar errores
+        // Manejardor de errores
         if (data["estado"] == "ok") {
-          console.log("me ha llegado el ok");
           // Se actualiza introduce el alumno a la DB mediante PHP y se actualiza la alumno
           // TODO TOAST Alumno Añadido
           this.obtenerAlumnos(this.mostrarTablaAlumnos);
@@ -193,6 +192,21 @@ class App {
         // TODO TOAST No se ha podido añadir al alumno
       });
   }
+
+  mostrarModificarAlumno(alumnno) {
+    /* Recibe como parametro un objeto alumno, simplemente va navegando
+    por el DOM del formulario ubicado en el DIALOG para modificar alumnos 
+    y le va poniendo sus respectivos valores 
+    con la intencion de que el usuario los modifique, salvo el ID que se guarda en la variable 
+    global*/
+    let formModificar = document.querySelector("#formModificarAlumno");
+    formModificar.children[0].children[0].value = String(alumnno.name);
+    formModificar.children[2].children[0].value = String(alumnno.bd);
+    formModificar.children[4].children[0].value = Number(alumnno.tel);
+    formModificar.children[6].children[0].value = String(alumnno.addr);
+  }
+
+  modificarAlumno(datosAlumnoAModificar) {}
 
   // DEBUG
   pruebaDeCallback(datos) {

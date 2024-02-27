@@ -4,6 +4,7 @@
 // Variables globales
 /////////////////////
 var idAEliminar = -1;
+var idAModificar = -1;
 
 //////////////
 // Functions
@@ -43,7 +44,14 @@ document.querySelector("#tablaAlumnos").addEventListener("click", (e) => {
       return;
     }
     if (funcion == "modificar") {
-      alert(funcion + id);
+      // Aqui se abre el DIALOG para modificar alumnos
+      document.querySelector("#dModificarAlumno").showModal();
+
+      // Se guarda el id del alumno en una variable global
+      idAModificar = id;
+
+      // Se muestran los datos actuales del alumno en el formulario
+      aManager.buscarAlumno(idAModificar, aManager.mostrarModificarAlumno);
       return;
     }
     if (funcion == "calificar") {
@@ -86,6 +94,8 @@ document
 // Evento para cuando se pulsa el boton cerrar de el dialog para añadir alumnos
 document.querySelector("#btnAñadirCerrar").addEventListener("click", () => {
   document.querySelector("#dAñadirAlumno").close();
+
+  // TODO TOAST No se ha añadido ningun Alumno
 });
 
 // Evento por si se decide añadir el alumno en el dialog para añadir lo alumno
@@ -94,7 +104,7 @@ document.querySelector("#btnAñadirAlumno").addEventListener("click", () => {
   let nombre = String(document.forms[0].children[0].children[0].value);
   let bd = String(document.forms[0].children[2].children[0].value);
   let tel = Number(document.forms[0].children[4].children[0].value);
-  let addr = document.forms[0].children[6].children[0].value;
+  let addr = String(document.forms[0].children[6].children[0].value);
 
   // TODO Validacion de datos
 
@@ -103,7 +113,33 @@ document.querySelector("#btnAñadirAlumno").addEventListener("click", () => {
     aManager.crearAlumno(al);
     document.querySelector("#dAñadirAlumno").close();
   } else {
-    // TODO TOAST Decirle al usuario que compruebe los errores
+    // TODO TOAST Decirle al usuario que compruebe los errores (Funcion validacion devuelve un ARRAY)
+  }
+});
+
+// Evento para cerrar el dialog Modificar Alumnos
+document.querySelector("#btnModificarCerrar").addEventListener("click", () => {
+  document.querySelector("#dModificarAlumno").close();
+
+  // TODO TOAST No se ha modificado el Alumno
+});
+
+// Evento por si se decide Modificar el alumno en el DIALOG para modificar al alumno
+document.querySelector("#btnModificarAlumno").addEventListener("click", () => {
+  const divErrores = document.querySelector("#DivErroresModificar");
+  let nombre = String(document.forms[0].children[0].children[0].value);
+  let bd = String(document.forms[0].children[2].children[0].value);
+  let tel = Number(document.forms[0].children[4].children[0].value);
+  let addr = String(document.forms[0].children[6].children[0].value);
+
+  // TODO Validacion de datos
+
+  if (true) {
+    let al = new Alumno(idAModificar, nombre, bd, tel, addr);
+    aManager.modificarAlumno(al);
+    document.querySelector("#dAñadirAlumno").close();
+  } else {
+    // TODO TOAST Decirle al usuario que compruebe los errores (Funcion validacion devuelve un ARRAY)
   }
 });
 

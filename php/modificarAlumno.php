@@ -1,6 +1,7 @@
 <?php
-/* Este script se encarga de añadir alumnos a la base de datos y devolver un JSON con el estado */
+/* Este script se encarga de modifcar alumnos a la base de datos y devolver un JSON con el estado */
 
+/*
 // Recibir datos JSON
 $json_data = file_get_contents('php://input');
 
@@ -47,3 +48,4 @@ try {
     echo json_encode(array('estado' => "PDOException"));
     die();
 }
+*/

@@ -25,7 +25,7 @@
         <label for="tel">Telefono: <input type="tel" name="tel" /></label>
         <br />
         <label for="addr">Dirección: <input type="text" name="addr" /></label>
-        <br>
+        <br />
         <button type="button" id="btnAñadirAlumno">Añadir Alumno</button>
         <button type="button" id="btnAñadirCerrar">Cerrar</button>
       </form>
@@ -69,6 +69,27 @@
         Eliminar
       </button>
     </dialog>
+
+    <!-- Dialog para modificar alumnos -->
+    <dialog id="dModificarAlumno">
+      <form id="formModificarAlumno">
+        <label for="nombre">Nombre: <input type="text" name="nombre" /></label>
+        <br />
+        <label for="date"
+          >Fecha de nacimiento: <input type="date" name="bd"
+        /></label>
+        <br />
+        <label for="tel">Telefono: <input type="tel" name="tel" /></label>
+        <br />
+        <label for="addr">Dirección: <input type="text" name="addr" /></label>
+        <br />
+        <button type="button" id="btnModificarAlumno">Modificar Alumno</button>
+        <button type="button" id="btnModificarCerrar">Cerrar</button>
+      </form>
+      <div id="DivErroresModificar"></div>
+    </dialog>
+
+    <!--Navbar-->
 
     <!-- Parte principal de la pagina -->
 

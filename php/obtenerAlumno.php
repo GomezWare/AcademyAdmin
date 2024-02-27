@@ -1,5 +1,5 @@
 <?php
-/* En este fichero se devolvera un JSON con un alumno cuyo ID se recibe por post */
+/* En este fichero se devolvera un JSON con un alumno cuyo ID se recibe por post (URL Params)*/
 
 // Validación de datos se verifica si el ID ha llegado mediante POST
 if (!isset($_POST['id'])) {

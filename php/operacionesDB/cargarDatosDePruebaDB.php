@@ -3,7 +3,7 @@
 // Este script NO debe ser usado en produccion solo en desarrollo
 
 try {
-    $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
+    $db = new PDO('sqlite:' . '../../basedatos/bd.sqlite');
 
     $sqlAlumnos = <<<SQL
     INSERT INTO students (student_name, student_bd, student_tel, student_address) VALUES ("Alumno1", "1991-09-17" ,600111222 ,"Alguna calle" );

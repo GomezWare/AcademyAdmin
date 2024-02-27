@@ -30,18 +30,22 @@ class Alumno {
     // A cada boton se le asinara un name y una imagen luego sera usado en el EventListener de la tabla
     let btnDetalles = document.createElement("button");
     btnDetalles.name = "detalles";
+    btnDetalles.title = "Ver detalles del alumno";
     btnDetalles.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/detalles.png' />`;
 
     let btnBorrar = document.createElement("button");
     btnBorrar.name = "borrar";
+    btnBorrar.title = "Eliminar al Alumno";
     btnBorrar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/borrar.png' />`;
 
     let btnModificar = document.createElement("button");
     btnModificar.name = "modificar";
+    btnModificar.title = "Modificar al Alumno";
     btnModificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/modificar.png' />`;
 
     let btnCalificar = document.createElement("button");
     btnCalificar.name = "calificar";
+    btnCalificar.title = "Añadir una calificion";
     btnCalificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/calificacion.png' />`;
 
     // Se añaden los elementos mediante appendChild
