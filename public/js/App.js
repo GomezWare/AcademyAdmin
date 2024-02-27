@@ -163,7 +163,7 @@ class App {
   }
 
   crearAlumno(Alumno) {
-    // Funcion encargadas de añadir un alumno a la DB a partir de un objeto Alumno
+    // Funcion encargada de añadir un alumno a la DB a partir de un objeto Alumno
 
     fetch("../../php/crearAlumno.php", {
       method: "POST",
@@ -181,7 +181,7 @@ class App {
       .then((data) => {
         // Manejardor de errores
         if (data["estado"] == "ok") {
-          // Se actualiza introduce el alumno a la DB mediante PHP y se actualiza la alumno
+          // Se actualiza y se introduce el alumno a la DB mediante PHP y se actualiza la lista
           // TODO TOAST Alumno Añadido
           this.obtenerAlumnos(this.mostrarTablaAlumnos);
         } else {
@@ -206,7 +206,38 @@ class App {
     formModificar.children[6].children[0].value = String(alumnno.addr);
   }
 
-  modificarAlumno(datosAlumnoAModificar) {}
+  modificarAlumno(Alumno) {
+  // Funcion encargada de modificar los datos de un alumno de la DB a partir de un objeto Alumno
+
+  fetch("../../php/modificarAlumno.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(Alumno),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        // TODO TOAST Error de red
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Manejardor de errores
+      if (data["estado"] == "ok") {
+        // Se actualiza y se modifica el alumno a la DB mediante PHP y se actualiza la lista
+        // TODO TOAST Alumno Modificado
+        this.obtenerAlumnos(this.mostrarTablaAlumnos);
+      } else {
+        // TODO TOAST No se ha podido añadir al alumno
+      }
+    })
+    .catch((error) => {
+      // TODO TOAST No se ha podido añadir al alumno
+      console.log(error);
+    });
+  
+  }
 
   // DEBUG
   pruebaDeCallback(datos) {
