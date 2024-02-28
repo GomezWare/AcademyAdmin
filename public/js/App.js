@@ -5,6 +5,10 @@
 class App {
   constructor() {}
 
+  ///////////////////////////
+  // Funciones Tabla Alumnos
+  /////////////////////////
+
   obtenerAlumnos(callback) {
     /* Esta funcion obtiene todos los alumnos de la base de datos,
     Esta funcion se llama al principio de la aplicacion y para 
@@ -306,4 +310,8 @@ class App {
         console.log(error);
       });
   }
+
+  ///////////////////////////
+  // Funciones Tabla Examen
+  /////////////////////////
 }

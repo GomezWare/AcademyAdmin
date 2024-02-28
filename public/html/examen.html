@@ -1,10 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestionar Examenes</title>
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <script defer src="../js/Toasts.js"></script>
+    <script defer src="../js/Examen.js"></script>
+    <script defer src="../js/App.js"></script>
+    <script defer src="../js/mainExamen.js"></script>
+    <link rel="stylesheet" href="../css/water.css" />
+    <link rel="stylesheet" href="../css/toast.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Dialog para añadir alumnos -->
+    <dialog id="dAñadirAlumno">
+      <form id="formAñadirAlumno">
+        <button type="button" id="btnAñadirAlumno">Añadir Alumno</button>
+        <button type="button" id="btnAñadirCerrar">Cerrar</button>
+      </form>
+      <div id="DivErroresAñadir" class="divErrores">
+        <ul></ul>
+      </div>
+    </dialog>
+
+    <!-- Dialog para ver los detalles de un  alumno -->
+
+    <dialog id="dDatosAlumno">
+      <form id="formDatosAlumno"></form>
+      <button id="btnCerrarDetalles">Cerrar</button>
+    </dialog>
+
+    <!-- Dialog para borrar alumnos -->
+    <dialog id="dEliminarAlumno">
+      <h2>¿Desea borrar al alumno?</h2>
+      <h3 id="alumnoAEliminar"></h3>
+      <button id="btnCancelarEliminacion">Cancelar</button>
+      <button
+        id="btnEliminar"
+        style="background-color: rgba(228, 71, 71, 0.966)"
+      >
+        Eliminar
+      </button>
+    </dialog>
+
+    <!-- Dialog para modificar alumnos -->
+    <dialog id="dModificarAlumno">
+      <form id="formModificarAlumno">
+        <button type="button" id="btnModificarAlumno">Modificar Alumno</button>
+        <button type="button" id="btnModificarCerrar">Cerrar</button>
+      </form>
+      <div class="divErrores" id="DivErroresModificar">
+        <ul></ul>
+      </div>
+    </dialog>
+
+    <!--Navbar-->
+
+    <!-- Parte principal de la pagina -->
+
+    <details>
+      <summary>
+        <img width="16" src="../img/param.png" /> Listado Parametrizado
+      </summary>
+      <form id="formFiltrarAlumnos">
+        <button type="button" id="btnFiltrarAlumnos">Filtrar Alumnos</button>
+        <button type="button" id="btnReiniciar">Reiniciar Filtros</button>
+      </form>
+      <div id="divErroresFiltar"></div>
+    </details>
+    <button id="btnAbrirDialogAñadirAlumno">
+      <img width="24" src="../img/añadirAlumno.png" /> Añadir Alumno
+    </button>
+    <table border="1" id="tablaAlumnos">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Telefono</th>
+        <th>Opciones</th>
+      </tr>
+      <tbody id="listaAlumnos"></tbody>
+    </table>
+  </body>
 </html>
