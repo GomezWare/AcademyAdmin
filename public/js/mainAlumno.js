@@ -9,6 +9,64 @@ var idAModificar = -1;
 //////////////
 // Functions
 /////////////
+const validarAlumno = (nombre, bd, telefono, address) => {
+  // Funcion encargada de las validaciones de datos del lado del cliente
+
+  let errores = Array();
+
+  // Validaciones del nombre
+  if (nombre.length == 0 || nombre.length < 4) {
+    errores.push("El nombre del alumno es demasiado corto minimo 5 caracteres");
+  }
+
+  if (nombre.length > 50) {
+    errores.push(
+      "El nombre del alumno es demasiado largo maximo 50 caracteres"
+    );
+  }
+
+  if (/\d/.test(nombre)) {
+    errores.push("El nombre del alumno no puede contener numeros");
+  }
+  // Validaciones de la fecha de nacimiento
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(bd)) {
+    errores.push("La fecha de nacimiento no concuerda");
+  }
+
+  const valFecha = new Date(bd);
+  if (isNaN(valFecha.getTime())) {
+    errores.push("La fecha que se ha introducido es erronea");
+  } else {
+    if (valFecha.getFullYear() <= 1900 || valFecha.getFullYear() >= 2099) {
+      errores.push("El año no es correcto");
+    }
+  }
+
+  // Validaciones del telefono
+  if (telefono.toString().length !== 9) {
+    errores.push("El numero de telefono debe de ser de 9 digitos");
+  }
+
+  if (/[a-zA-Z]/.test(telefono.toString())) {
+    errores.push("El numero de telefono no es correcto");
+  }
+
+  if (/^[^679]/.test(telefono.toString())) {
+    errores.push("El numero de telefono debe comenzar por 6, 7 o 9");
+  }
+
+  // Validaciones de la direccion
+  if (address.length == 0 || address.length < 6) {
+    errores.push("La direccion es demasiado corta, minimo 7 caracteres");
+  }
+
+  if (address.length > 100) {
+    errores.push("La direccion no puede exceder los 100 caracteres");
+  }
+
+  return errores;
+};
 
 ///////////
 // Events
@@ -55,6 +113,8 @@ document.querySelector("#tablaAlumnos").addEventListener("click", (e) => {
       return;
     }
     if (funcion == "calificar") {
+      // TODO funcion calificar
+
       alert(funcion + id);
       return;
     }
@@ -72,7 +132,7 @@ document
   .addEventListener("click", () => {
     document.querySelector("#dEliminarAlumno").close();
 
-    // TODO TOAST se ha cancelado la eliminacion del alumno
+    createToast("No se ha eliminado ningun Alumno", "warning");
   });
 
 // Evento por si se decide borrar a un alumno
@@ -94,53 +154,72 @@ document
 // Evento para cuando se pulsa el boton cerrar de el dialog para añadir alumnos
 document.querySelector("#btnAñadirCerrar").addEventListener("click", () => {
   document.querySelector("#dAñadirAlumno").close();
-
-  // TODO TOAST No se ha añadido ningun Alumno
+  document.querySelector("#DivErroresAñadir").firstElementChild.innerHTML = "";
+  createToast("No se ha eliminado añadido ningun Alumno", "warning");
 });
 
-// Evento por si se decide añadir el alumno en el dialog para añadir lo alumno
+// Evento por si se decide añadir el alumno en el dialog para añadir al alumno
 document.querySelector("#btnAñadirAlumno").addEventListener("click", () => {
-  const divErrores = document.querySelector("#DivErroresAñadir");
+  const divErrores =
+    document.querySelector("#DivErroresAñadir").firstElementChild;
   let nombre = String(document.forms[0].children[0].children[0].value);
   let bd = String(document.forms[0].children[2].children[0].value);
   let tel = Number(document.forms[0].children[4].children[0].value);
   let addr = String(document.forms[0].children[6].children[0].value);
 
-  // TODO Validacion de datos
+  let errores = validarAlumno(nombre, bd, tel, addr);
 
-  if (true) {
+  if (errores.length == 0) {
+    // Si no hay errores se sigue
     let al = new Alumno(-1, nombre, bd, tel, addr);
     aManager.crearAlumno(al);
     document.querySelector("#dAñadirAlumno").close();
   } else {
-    // TODO TOAST Decirle al usuario que compruebe los errores (Funcion validacion devuelve un ARRAY)
+    // Si hay errores se muestran al usuario
+    divErrores.innerHTML = "";
+    errores.forEach((error) => {
+      let e = document.createElement("LI");
+      e.innerText = error;
+      divErrores.appendChild(e);
+    });
   }
 });
 
 // Evento para cerrar el dialog Modificar Alumnos
 document.querySelector("#btnModificarCerrar").addEventListener("click", () => {
   document.querySelector("#dModificarAlumno").close();
-
-  // TODO TOAST No se ha modificado el Alumno
+  const divErrores = (document.querySelector(
+    "#DivErroresModificar"
+  ).firstElementChild.innerHTML = "");
+  createToast("No se ha modificado ningun Alumno", "warning");
 });
 
 // Evento por si se decide Modificar el alumno en el DIALOG para modificar al alumno
 document.querySelector("#btnModificarAlumno").addEventListener("click", () => {
-  const divErrores = document.querySelector("#DivErroresModificar");
+  const divErrores = document.querySelector(
+    "#DivErroresModificar"
+  ).firstElementChild;
   let nombre = String(document.forms[2].children[0].children[0].value);
   let bd = String(document.forms[2].children[2].children[0].value);
   let tel = Number(document.forms[2].children[4].children[0].value);
   let addr = String(document.forms[2].children[6].children[0].value);
 
-  // TODO Validacion de datos
+  // Se validan los datos
+  let errores = validarAlumno(nombre, bd, tel, addr);
 
-  if (true) {
+  if (errores.length == 0) {
+    // Si no hay errores se sigue
     let al = new Alumno(idAModificar, nombre, bd, tel, addr);
     aManager.modificarAlumno(al);
     document.querySelector("#dModificarAlumno").close();
   } else {
-    document.querySelector("#dModificarAlumno").close();
-    // TODO TOAST Decirle al usuario que compruebe los errores (Funcion validacion devuelve un ARRAY)
+    // Si hay errores se muestran al usuario
+    divErrores.innerHTML = "";
+    errores.forEach((error) => {
+      let e = document.createElement("LI");
+      e.innerText = error;
+      divErrores.appendChild(e);
+    });
   }
 });
 
@@ -151,23 +230,22 @@ document.querySelector("#btnFiltrarAlumnos").addEventListener("click", () => {
   let nombre = String(form.children[0].firstElementChild.value);
   let telefono = Number(form.children[1].firstElementChild.value);
 
-  // TODO Validacion de datos
+  // Se crea un array que contiene los posibles filtros
+  let filtros = new Array();
+  filtros["name"] = nombre;
+  filtros["tel"] = telefono;
 
-  if (true) {
-    let filtros = new Array();
-    filtros["name"] = nombre;
-    filtros["tel"] = telefono;
-    aManager.obtenerAlumnosFiltrados(aManager.mostrarTablaAlumnos, filtros);
-  } else {
-    // TODO Mostrar errores
-  }
+  // Se ejecuta la funcion
+  aManager.obtenerAlumnosFiltrados(aManager.mostrarTablaAlumnos, filtros);
 });
 
 // Evento para reiniciar filtros
 document.querySelector("#btnReiniciar").addEventListener("click", () => {
+  // Tambien se reinician los campos
   let form = document.forms[3];
   form.children[0].firstElementChild.value = "";
   form.children[1].firstElementChild.value = "";
+  // Se vuelve a mostrar el listado de alumnos
   aManager.obtenerAlumnos(aManager.mostrarTablaAlumnos);
 });
 

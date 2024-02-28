@@ -1,0 +1,64 @@
+/* Fichero CSS utilizado para mostrar los toasts por pantalla */
+
+.toast {
+  /* Modelo basico para un toast*/
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  padding-inline: 0.7rem;
+  margin-top: 3rem;
+  border-radius: 0.2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  color: whitesmoke;
+
+  font-weight: 700;
+
+  transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
+.toast > img {
+  /* Aqui se controlan los iconos del toast*/
+  width: 1.6rem;
+  margin-right: 0.4rem;
+}
+
+.toast + .toast {
+  /* Esto es por si se juntaran mas de un toast en la pantalla que se puedan ver todos */
+  margin-top: -3rem;
+  transform: translateY(-130%);
+}
+
+.hide {
+  /* Clase para cuando se oculta un toast*/
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.toast-normal {
+  /* Toast normal */
+  background-color: rgb(57, 116, 136);
+  border: 2px solid rgb(28, 67, 80);
+}
+
+.toast-warning {
+  /* Toast de advertencia */
+  background-color: rgb(170, 131, 23);
+  border: 2px solid rgb(192, 174, 14);
+}
+
+.toast-error {
+  /* Toast de error */
+  background-color: rgb(187, 73, 73);
+  border: 2px solid rgb(175, 9, 9);
+}
+
+.toast-success {
+  /* Toast de operacion correcta */
+  background-color: rgb(86, 172, 15);
+  border: 2px solid rgb(117, 226, 15);
+}

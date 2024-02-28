@@ -3,9 +3,6 @@
 ## Tabla Alumnos
 
 ### FRONTEND
-
-TODO Validaciones
-TODO TOASTS
 TODO NAVBAR
 
 ## Tabla Examenes

@@ -33,7 +33,7 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
-        // TODO TOAST mostrar error de serviodor
+        createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
   }
@@ -68,7 +68,7 @@ class App {
             // Se van a filtrar el nombre y el telefono
 
             if (
-              nombreAlumno.includes(nombreComparar) ||
+              nombreAlumno.includes(nombreComparar) &&
               telefonoAlumno.includes(telefonoComparar)
             ) {
               arrAlumnos.push(alumno);
@@ -93,7 +93,7 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
-        // TODO TOAST mostrar error de serviodor
+        createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
   }
@@ -162,9 +162,9 @@ class App {
         // Manejar errores de la solicitud
 
         if (error == "server") {
-          // TODO TOAST con error del servidor
+          createToast("Ha ocurrido en error en el servidor", "error");
         } else {
-          // TODO TOAST con error no se encuentra el alumno
+          createToast("No se ha encontrado al alumno", "error");
         }
       });
   }
@@ -189,7 +189,10 @@ class App {
       })
       .then((resultado) => {
         if (resultado.estado == "ok") {
-          // TODO TOAST confirmando la eliminacion del alumno
+          createToast(
+            "Se ha eliminado al alumno con id " + id + " Correctamente",
+            "success"
+          );
 
           /*Se refresca la lista de alumnos*/
           this.obtenerAlumnos(this.mostrarTablaAlumnos);
@@ -201,10 +204,11 @@ class App {
         // Manejar errores de la solicitud
 
         if (error == "server") {
-          // TODO TOAST con error del servidor
+          createToast("Ha ocurrido un error en el servidor", "error");
           console.log("Error servidor");
         } else {
-          // TODO TOAST con error no se ha podido eliminar el alumno
+          createToast("No se ha podido eliminar al Alumno", "error");
+
           console.log("Error al eliminar");
         }
       });
@@ -234,7 +238,7 @@ class App {
     })
       .then((response) => {
         if (!response.ok) {
-          // TODO TOAST Error de red
+          createToast("Error en la red", "error");
         }
         return response.json();
       })
@@ -242,14 +246,15 @@ class App {
         // Manejardor de errores
         if (data["estado"] == "ok") {
           // Se actualiza y se introduce el alumno a la DB mediante PHP y se actualiza la lista
-          // TODO TOAST Alumno Añadido
+          createToast("Alumno añadido correctamente", "success");
+
           this.obtenerAlumnos(this.mostrarTablaAlumnos);
         } else {
-          // TODO TOAST No se ha podido añadir al alumno
+          createToast("No se ha podido añadir al Alumno", "error");
         }
       })
       .catch((error) => {
-        // TODO TOAST No se ha podido añadir al alumno
+        createToast("No se ha podido añadir al Alumno", "error");
       });
   }
 
@@ -278,7 +283,7 @@ class App {
     })
       .then((response) => {
         if (!response.ok) {
-          // TODO TOAST Error de red
+          createToast("Error en la red", "error");
         }
         return response.json();
       })
@@ -286,14 +291,16 @@ class App {
         // Manejardor de errores
         if (data["estado"] == "ok") {
           // Se actualiza y se modifica el alumno a la DB mediante PHP y se actualiza la lista
-          // TODO TOAST Alumno Modificado
+          createToast("Alumno modificado correctamente", "success");
+
           this.obtenerAlumnos(this.mostrarTablaAlumnos);
         } else {
-          // TODO TOAST No se ha podido añadir al alumno
+          createToast("No se ha podido modificar al Alumno", "error");
         }
       })
       .catch((error) => {
-        // TODO TOAST No se ha podido añadir al alumno
+        createToast("No se ha podido modificar al Alumno", "error");
+
         console.log(error);
       });
   }

@@ -1,0 +1,18 @@
+/* Este fichero CSS incluye algunos estilos adicionales */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.divErrores {
+  margin-top: 1rem;
+  background-color: rgb(196, 80, 80);
+  border-radius: 0.3rem;
+  padding-inline: 0.5rem;
+}
+
+.divErrores ul {
+  margin-top: 0.3rem;
+}

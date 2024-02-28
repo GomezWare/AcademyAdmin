@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestionar Alumnos</title>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <script defer src="../js/Toasts.js"></script>
     <script defer src="../js/Alumno.js"></script>
     <script defer src="../js/App.js"></script>
     <script defer src="../js/mainAlumno.js"></script>
@@ -12,6 +13,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
     />
+    <link rel="stylesheet" href="../css/toast.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <!-- Dialog para añadir alumnos -->
@@ -30,7 +33,9 @@
         <button type="button" id="btnAñadirAlumno">Añadir Alumno</button>
         <button type="button" id="btnAñadirCerrar">Cerrar</button>
       </form>
-      <div id="DivErroresAñadir"></div>
+      <div id="DivErroresAñadir" class="divErrores">
+        <ul></ul>
+      </div>
     </dialog>
 
     <!-- Dialog para ver los detalles de un  alumno -->
@@ -87,7 +92,9 @@
         <button type="button" id="btnModificarAlumno">Modificar Alumno</button>
         <button type="button" id="btnModificarCerrar">Cerrar</button>
       </form>
-      <div id="DivErroresModificar"></div>
+      <div class="divErrores" id="DivErroresModificar">
+        <ul></ul>
+      </div>
     </dialog>
 
     <!--Navbar-->
