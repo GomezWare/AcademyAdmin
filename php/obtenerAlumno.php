@@ -14,12 +14,11 @@ try {
     /* Conexión PDO */
     $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
 
-    // HACK Arreglar la preparedQuery con un BIND
-
     // Se hace un PreparedQuery y se ejecuta en la BD
-    $query = "SELECT * FROM students WHERE student_id = :id";
+    $query = "SELECT * FROM students WHERE student_id = :student_id";
     $stmt = $db->prepare($query);
-    $stmt->execute(array(':id' => $_POST['id']));
+    $stmt->bindParam(':student_id', $_POST['id'], PDO::PARAM_INT);
+    $stmt->execute();
 
     // Se Obtienen los datos del estudiante
     $estudiante = $stmt->fetch(PDO::FETCH_ASSOC);

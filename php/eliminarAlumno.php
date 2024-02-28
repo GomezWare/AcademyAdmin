@@ -14,12 +14,11 @@ try {
     /* Conexión PDO */
     $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
 
-    // HACK Arreglar la preparedQuery con un BIND
-
     // Se hace un PreparedQuery y se ejecuta en la BD
-    $query = "DELETE FROM students WHERE student_id = :id";
+    $query = "DELETE FROM students WHERE student_id = :student_id";
     $stmt = $db->prepare($query);
-    $stmt->execute(array(':id' => $_POST['id']));
+    $stmt->bindParam(':student_id', $_POST['id'], PDO::PARAM_INT);
+    $stmt->execute();
 
     // Se comprueba que efectivamente se ha borrado el alumno
     // Si no se ha borrado nada se devuelve un JSON con estado en error si se ha borrado se JSON con estado en ok
