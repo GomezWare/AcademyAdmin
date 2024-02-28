@@ -10,7 +10,7 @@ class App {
     Esta funcion se llama al principio de la aplicacion y para 
     actualizar los registros por pantalla */
 
-    fetch("../../php/listarAlumnos.php")
+    fetch("../../php/tablaAlumnos/listarAlumnos.php")
       .then((response) => response.json())
       .then((JSONalumnos) => {
         let arrAlumnos = [];
@@ -33,6 +33,7 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
+        console.log(error);
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
@@ -41,7 +42,7 @@ class App {
   obtenerAlumnosFiltrados(callback, filtros) {
     /* Esta funcion obtiene todos los alumnos de la base de datos y filtra a los alumnos */
 
-    fetch("../../php/listarAlumnos.php")
+    fetch("../../php/tablaAlumnos/listarAlumnos.php")
       .then((response) => response.json())
       .then((JSONalumnos) => {
         let arrAlumnos = [];
@@ -93,6 +94,7 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
+        console.log(error);
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
@@ -122,7 +124,7 @@ class App {
     /* Como parametros esta el id del alumno a buscar y la funcion de callback a ejecutar */
 
     // Realizar la solicitud Fetch POST, el id se mandara en forma de URL
-    fetch("../../php/obtenerAlumno.php", {
+    fetch("../../php/tablaAlumnos/obtenerAlumno.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -172,7 +174,7 @@ class App {
   eliminarAlumno(id) {
     /* Esta funcion elimina a alumno, no tiene callback */
 
-    fetch("../../php/eliminarAlumno.php", {
+    fetch("../../php/tablaAlumnos/eliminarAlumno.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -229,7 +231,7 @@ class App {
   crearAlumno(Alumno) {
     // Funcion encargada de añadir un alumno a la DB a partir de un objeto Alumno
 
-    fetch("../../php/crearAlumno.php", {
+    fetch("../../php/tablaAlumnos/crearAlumno.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -274,7 +276,7 @@ class App {
   modificarAlumno(Alumno) {
     // Funcion encargada de modificar los datos de un alumno de la DB a partir de un objeto Alumno
 
-    fetch("../../php/modificarAlumno.php", {
+    fetch("../../php/tablaAlumnos/modificarAlumno.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -303,9 +305,5 @@ class App {
 
         console.log(error);
       });
-  }
-
-  filtrarAlumnos(filtros) {
-    // Funcion encargada de filtrar los alumnos
   }
 }

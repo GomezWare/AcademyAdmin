@@ -12,7 +12,7 @@ if (!isset($_POST['id'])) {
 
 try {
     /* Conexión PDO */
-    $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
+    $db = new PDO('sqlite:' . '../../basedatos/bd.sqlite');
 
     // Se hace un PreparedQuery y se ejecuta en la BD
     $query = "SELECT * FROM students WHERE student_id = :student_id";

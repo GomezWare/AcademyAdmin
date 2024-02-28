@@ -1,5 +1,7 @@
 <?php
-/* Este script se encarga de añadir alumnos a la base de datos y devolver un JSON con el estado */
+/* Este script se encarga de modificar alumnos a la base de datos y devolver un JSON con el estado */
+
+// Funcion de validacion
 
 // Recibir datos JSON
 $json_data = file_get_contents('php://input');
@@ -20,20 +22,20 @@ if ($Alumno === null && json_last_error() !== JSON_ERROR_NONE) {
 
 // Conexion PDO
 try {
-    $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
+    $db = new PDO('sqlite:' . '../../basedatos/bd.sqlite');
     // Se hace un PreparedQuery que se ejecutara en la BD
-    $query = "INSERT INTO students (student_name, student_bd, student_tel, student_address) VALUES (:student_name, :student_bd , :student_tel , :student_address);";
+    $query = "UPDATE students SET student_name = :student_name, student_bd = :student_bd , student_tel = :student_tel , student_address = :student_address WHERE student_id = :student_id;";
     $stmt = $db->prepare($query);
     // Se bindean los atributos y se ejecuta la query
     $stmt->bindParam(':student_name', $Alumno['name'], PDO::PARAM_STR);
     $stmt->bindParam(':student_bd', $Alumno['bd'], PDO::PARAM_STR);
     $stmt->bindParam(':student_tel', $Alumno['tel'], PDO::PARAM_INT);
     $stmt->bindParam(':student_address', $Alumno['addr'], PDO::PARAM_STR);
-
+    $stmt->bindParam(':student_id', $Alumno['id'], PDO::PARAM_INT);
     //$ok = 
     $ok = $stmt->execute();
 
-    // Se comprueba que se ha insertado el alumno
+    // Se comprueba que se ha actualizado el alumno
     if ($ok) {
         header('Content-Type: application/json');
         echo json_encode(array('estado' => 'ok'));

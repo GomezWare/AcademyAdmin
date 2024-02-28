@@ -3,7 +3,7 @@
 
 try {
     // Conexion DB
-    $db = new PDO('sqlite:' . '../basedatos/bd.sqlite');
+    $db = new PDO('sqlite:' . '../../basedatos/bd.sqlite');
 
     // Preparacion de la query
     $query = "SELECT * FROM students";
