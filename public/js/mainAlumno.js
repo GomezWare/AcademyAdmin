@@ -144,6 +144,33 @@ document.querySelector("#btnModificarAlumno").addEventListener("click", () => {
   }
 });
 
+// Evento para el boton de filtrar Alumnos
+document.querySelector("#btnFiltrarAlumnos").addEventListener("click", () => {
+  let divErrores = document.querySelector("#divErroresFiltar");
+  let form = document.forms[3];
+  let nombre = String(form.children[0].firstElementChild.value);
+  let telefono = Number(form.children[1].firstElementChild.value);
+
+  // TODO Validacion de datos
+
+  if (true) {
+    let filtros = new Array();
+    filtros["name"] = nombre;
+    filtros["tel"] = telefono;
+    aManager.obtenerAlumnosFiltrados(aManager.mostrarTablaAlumnos, filtros);
+  } else {
+    // TODO Mostrar errores
+  }
+});
+
+// Evento para reiniciar filtros
+document.querySelector("#btnReiniciar").addEventListener("click", () => {
+  let form = document.forms[3];
+  form.children[0].firstElementChild.value = "";
+  form.children[1].firstElementChild.value = "";
+  aManager.obtenerAlumnos(aManager.mostrarTablaAlumnos);
+});
+
 //////////
 // Main
 /////////

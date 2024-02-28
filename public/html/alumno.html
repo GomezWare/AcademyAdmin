@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Gestionar Alumnos</title>
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
     <script defer src="../js/Alumno.js"></script>
     <script defer src="../js/App.js"></script>
     <script defer src="../js/mainAlumno.js"></script>
@@ -97,7 +98,14 @@
       <summary>
         <img width="16" src="../img/param.png" /> Listado Parametrizado
       </summary>
-      <form id="formListParamAlumno"></form>
+      <form id="formFiltrarAlumnos">
+        <label for="nombre">Nombre: <input type="text" name="nombre" /></label>
+        <label for="tel">Telefono: <input type="tel" name="tel" /></label>
+        <br />
+        <button type="button" id="btnFiltrarAlumnos">Filtrar Alumnos</button>
+        <button type="button" id="btnReiniciar">Reiniciar Filtros</button>
+      </form>
+      <div id="divErroresFiltar"></div>
     </details>
     <button id="btnAbrirDialogAñadirAlumno">
       <img width="24" src="../img/añadirAlumno.png" /> Añadir Alumno

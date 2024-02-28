@@ -38,6 +38,66 @@ class App {
       });
   }
 
+  obtenerAlumnosFiltrados(callback, filtros) {
+    /* Esta funcion obtiene todos los alumnos de la base de datos y filtra a los alumnos */
+
+    fetch("../../php/listarAlumnos.php")
+      .then((response) => response.json())
+      .then((JSONalumnos) => {
+        let arrAlumnos = [];
+        // Luego recorre el objeto JSON recibido y va instanciando alumnos y aplicando los filtros
+        JSONalumnos.forEach((e) => {
+          let alumno = new Alumno(
+            e.student_id,
+            e.student_name,
+            e.student_bd,
+            e.student_tel,
+            e.student_address
+          );
+
+          // Se procesan los filtros
+
+          let nombreAlumno = alumno.name.toLowerCase();
+          let nombreComparar = filtros["name"].toLowerCase();
+          let telefonoAlumno = String(alumno.tel);
+          let telefonoComparar = String(filtros["tel"]);
+
+          // Aqui se evaluan los casos para filtrar
+
+          if (!(nombreComparar.length == 0) && !(telefonoComparar == 0)) {
+            // Se van a filtrar el nombre y el telefono
+
+            if (
+              nombreAlumno.includes(nombreComparar) ||
+              telefonoAlumno.includes(telefonoComparar)
+            ) {
+              arrAlumnos.push(alumno);
+            }
+          } else {
+            if (!(nombreComparar.length == 0)) {
+              // Se va a filtrar solo por el nombre
+
+              if (nombreAlumno.includes(nombreComparar)) {
+                arrAlumnos.push(alumno);
+              }
+            } else {
+              // Se va a filtrar por el telefono
+              if (telefonoAlumno.includes(telefonoComparar)) {
+                arrAlumnos.push(alumno);
+              }
+            }
+          }
+        });
+
+        callback(arrAlumnos);
+      })
+      .catch((error) => {
+        // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
+        // TODO TOAST mostrar error de serviodor
+        this.mostrarTablaAlumnos([]);
+      });
+  }
+
   mostrarTablaAlumnos(arrAlumnos) {
     // Esta funcion borra el cuerpo de la tabla actual y representa a los alumnos
     document.querySelector("#listaAlumnos").innerHTML = "";
@@ -207,41 +267,38 @@ class App {
   }
 
   modificarAlumno(Alumno) {
-  // Funcion encargada de modificar los datos de un alumno de la DB a partir de un objeto Alumno
+    // Funcion encargada de modificar los datos de un alumno de la DB a partir de un objeto Alumno
 
-  fetch("../../php/modificarAlumno.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(Alumno),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        // TODO TOAST Error de red
-      }
-      return response.json();
+    fetch("../../php/modificarAlumno.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Alumno),
     })
-    .then((data) => {
-      // Manejardor de errores
-      if (data["estado"] == "ok") {
-        // Se actualiza y se modifica el alumno a la DB mediante PHP y se actualiza la lista
-        // TODO TOAST Alumno Modificado
-        this.obtenerAlumnos(this.mostrarTablaAlumnos);
-      } else {
+      .then((response) => {
+        if (!response.ok) {
+          // TODO TOAST Error de red
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Manejardor de errores
+        if (data["estado"] == "ok") {
+          // Se actualiza y se modifica el alumno a la DB mediante PHP y se actualiza la lista
+          // TODO TOAST Alumno Modificado
+          this.obtenerAlumnos(this.mostrarTablaAlumnos);
+        } else {
+          // TODO TOAST No se ha podido añadir al alumno
+        }
+      })
+      .catch((error) => {
         // TODO TOAST No se ha podido añadir al alumno
-      }
-    })
-    .catch((error) => {
-      // TODO TOAST No se ha podido añadir al alumno
-      console.log(error);
-    });
-  
+        console.log(error);
+      });
   }
 
-  // DEBUG
-  pruebaDeCallback(datos) {
-    console.log("Se ha llegado a la funcion");
-    console.log(datos);
+  filtrarAlumnos(filtros) {
+    // Funcion encargada de filtrar los alumnos
   }
 }

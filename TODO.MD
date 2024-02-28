@@ -4,16 +4,9 @@
 
 ### FRONTEND
 
-TODO Modificar Alumno
-TODO Calificar Alumno
-TODO Listado Parametrizado
+TODO Validaciones
 TODO TOASTS
 TODO NAVBAR
-
-### BACKEND
-
-TODO PHP Modificar Alumno
-TODO PHP Listado Parametrizado
 
 ## Tabla Examenes
 
