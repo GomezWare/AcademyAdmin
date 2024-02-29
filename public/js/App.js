@@ -163,7 +163,6 @@ class App {
         }
       })
       .catch((error) => {
-        console.log(error);
         // Manejar errores de la solicitud
 
         if (error == "server") {
@@ -217,7 +216,6 @@ class App {
   }
 
   mostrarDetallesAlumno(alumnno) {
-    console.log(alumnno);
     /* Recibe como parametro un objeto alumno, simplemente va navegando
     por el DOM del formulario ubicado en el DIALOG y le va poniendo sus respectivos valores */
 
@@ -353,7 +351,7 @@ class App {
 
     // En caso de que no haya alumnos que representar se le hara saber al usuario
     if (arrExamenes.length == 0) {
-      document.querySelector("#listaAlumnos").innerHTML =
+      document.querySelector("#listaExamenes").innerHTML =
         "<tr><td colspan='4'>No se han encontrado examenes</td></tr>";
     } else {
       // Si hay Examenes estos se mostraran por pantalla

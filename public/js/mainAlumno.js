@@ -112,12 +112,6 @@ document.querySelector("#tablaAlumnos").addEventListener("click", (e) => {
       aManager.buscarAlumno(idAModificar, aManager.mostrarModificarAlumno);
       return;
     }
-    if (funcion == "calificar") {
-      // TODO funcion calificar
-
-      alert(funcion + id);
-      return;
-    }
   }
 });
 
