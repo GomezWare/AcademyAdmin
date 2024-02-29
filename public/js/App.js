@@ -493,7 +493,7 @@ class App {
           JSONalumnos.forEach((e) => {
             let option = document.createElement("OPTION");
             option.innerText = e.student_name;
-            option.setAttribute("id", e.student_id);
+            option.setAttribute("value", e.student_id);
             select.appendChild(option);
           });
         }
@@ -504,6 +504,43 @@ class App {
           "No se pueden mostrar alumnos, la tabla Alumnos esta vacia",
           "error"
         );
+      });
+  }
+
+  crearExamen(Examen) {
+    // Funcion encargada de añadir un examen a la DB a partir de un objeto Examen
+
+    fetch("../../php/tablaExamenes/crearExamen.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Examen),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          createToast("Error en la red", "error");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Manejardor de errores
+        if (data["estado"] == "ok") {
+          // Se actualiza y se introduce el alumno a la DB mediante PHP y se actualiza la lista
+          createToast("Alumno añadido correctamente", "success");
+
+          this.obtenerExamenes(this.mostrarTablaExamen);
+        }
+
+        if (data["estado"] == "errorAlumno") {
+          createToast(
+            "El examen no puede ser añadido a un alumno que no existe",
+            "error"
+          );
+        }
+      })
+      .catch((error) => {
+        createToast("No se ha podido añadir el Examen", "error");
       });
   }
 }

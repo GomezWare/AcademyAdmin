@@ -89,9 +89,48 @@ document
 
 document.querySelector("#btnAñadirCerrar").addEventListener("click", () => {
   document.querySelector("#dAñadirExamen").close();
+  document.querySelector("#divErroresAñadir").firstElementChild.innerHTML = "";
+
+  createToast("No se ha añadido ningun examen", "warning");
 });
 
 // Evento por si se decide añadir el examen en el dialog para añadir el examen
+document.querySelector("#btnAñadirExamen").addEventListener("click", () => {
+  const divErrores =
+    document.querySelector("#divErroresAñadir").firstElementChild;
+
+  let form = document.querySelector("#formAñadirExamenes");
+
+  let alumno = Number(form[0].value);
+  let fecha = String(form[1].value);
+  let asignatura = String(form[2].value);
+  let calificacion = Number(form[3].value);
+  let anotaciones = String(form[4].value);
+
+  // TODO Validar Datos
+  console.log(alumno, fecha, asignatura, calificacion, anotaciones);
+  if (true) {
+    // Si no hay errores se sigue
+    let examen = new Examen(
+      -1,
+      alumno,
+      fecha,
+      asignatura,
+      calificacion,
+      anotaciones
+    );
+    aManager.crearExamen(examen);
+    document.querySelector("#dAñadirExamen").close();
+  } else {
+    // Si hay errores se muestran al usuario
+    divErrores.innerHTML = "";
+    errores.forEach((error) => {
+      let e = document.createElement("LI");
+      e.innerText = error;
+      divErrores.appendChild(e);
+    });
+  }
+});
 
 // Evento para cerrar el dialog Modificar Examenes
 

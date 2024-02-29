@@ -32,28 +32,40 @@
         <br />
         <label for="fecha">
           Fecha del examen:
-          <input type="date" name="fecha" readonly />
+          <input type="date" name="fecha" />
         </label>
         <br />
         <label for="asignatura">
           Asignatura:
-          <input type="text" name="asignatura" readonly />
+          <input type="text" name="asignatura" />
         </label>
         <br />
         <label for="calificacion">
           Calificacion:
-          <input type="number" name="calificacion" readonly />
+          <select name="calificacion">
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select>
         </label>
         <br />
         <label for="anotaciones">
           Anotaciones:
-          <textarea name="anotaciones" cols="20" rows="5" readonly></textarea>
+          <textarea name="anotaciones" cols="20" rows="5"></textarea>
         </label>
         <br />
         <button type="button" id="btnAñadirExamen">Añadir Examen</button>
         <button type="button" id="btnAñadirCerrar">Cerrar</button>
       </form>
-      <div id="DivErroresAñadir" class="divErrores">
+      <div id="divErroresAñadir" class="divErrores">
         <ul></ul>
       </div>
     </dialog>
