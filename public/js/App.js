@@ -314,4 +314,64 @@ class App {
   ///////////////////////////
   // Funciones Tabla Examen
   /////////////////////////
+
+  obtenerExamenes(callback) {
+    /* Esta funcion obtiene todos los examenes de la base de datos,
+    Esta funcion se llama al principio de la aplicacion y para 
+    actualizar los registros por pantalla */
+
+    fetch("../../php/tablaExamenes/listarExamenes.php")
+      .then((response) => response.json())
+      .then((JSONExamen) => {
+        let arrExamenes = [];
+        // Luego recorre el objeto JSON recibido y va instanciando Examenes y metiendolos en un array
+        JSONExamen.forEach((e) => {
+          const alumno = { id: e.student_id, nombre: e.student_name };
+
+          let examen = new Examen(
+            e.exam_id,
+            alumno,
+            e.exam_date,
+            e.exam_subject,
+            e.exam_grade,
+            e.exam_notes
+          );
+
+          console.log(examen);
+
+          arrExamenes.push(examen);
+        });
+
+        // Este array se pasara a una funcion de callback para que se procesen los datos
+        // El array es una lista objetos tipo Examen
+        // Funcion de callback
+        callback(arrExamenes);
+      })
+      .catch((error) => {
+        // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
+        console.log(error);
+        createToast("Ha ocurrido un error en el servidor", "error");
+        this.mostrarTablaExamen([]);
+      });
+  }
+
+  mostrarTablaExamen(arrExamen) {
+    // Esta funcion borra el cuerpo de la tabla actual y representa los Examenes
+    document.querySelector("#listaExamenes").innerHTML = "";
+
+    // En caso de que no haya alumnos que representar se le hara saber al usuario
+    if (arrExamen.length == 0) {
+      document.querySelector("#listaAlumnos").innerHTML =
+        "<tr><td colspan='4'>No se han encontrado examenes</td></tr>";
+    } else {
+      // Si hay Examenes estos se mostraran por pantalla
+      arrExamen.forEach((examen) => {
+        /* Para obtener el TR con los datos del examen y 
+        las funciones se hace uso de la fucnion examenToRow de la clase Examen */
+        document
+          .querySelector("#listaExamenes")
+          .appendChild(examen.examenToRow());
+      });
+    }
+  }
 }

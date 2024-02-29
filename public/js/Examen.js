@@ -11,7 +11,7 @@ class Examen {
     this.anotaciones = anotaciones;
   }
 
-  alumnoToRow() {
+  examenToRow() {
     /* Esta funcion devuelve un TR con algunos datos de los Examenes*/
 
     // Para añadir los elementos se utiliza el DOM

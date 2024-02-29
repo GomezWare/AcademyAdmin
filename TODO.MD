@@ -4,7 +4,6 @@
 
 ### FRONTEND
 
-TODO Ver examenes
 TODO Añadir examen desde Alumno
 TODO Añadir examen
 TODO Modificar Examen

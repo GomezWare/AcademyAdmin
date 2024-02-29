@@ -1,5 +1,4 @@
 "use strict";
-"use strict";
 
 ///////////////////////
 // Variables globales
@@ -17,20 +16,15 @@ var idAModificar = -1;
 
 // Control de la tabla principal
 
-
 // Evento para cerrar el dialog de los detalles
-
 
 // Evento para cerrar el dialog de eliminar alumno
 
 // Evento por si se decide borrar a un alumno
 
-
 // Evento para cuando se pulsa el boton añadir alumno
 
-
 // Evento para cuando se pulsa el boton cerrar de el dialog para añadir alumnos
-
 
 // Evento por si se decide añadir el alumno en el dialog para añadir al alumno
 
@@ -42,10 +36,10 @@ var idAModificar = -1;
 
 // Evento para reiniciar filtros
 
-
 //////////
 // Main
 /////////
 
 /* Se instancia aManager que es la App principal y se muestran todos los examenes de la DB*/
 let aManager = new App();
+aManager.obtenerExamenes(aManager.mostrarTablaExamen);
