@@ -2,15 +2,7 @@
 /* La clase Examen representa a la entidad alumnno de la BD*/
 
 class Examen {
-  constructor(
-    id,
-    alumno,
-    asignatura,
-    fecha,
-    asignatura,
-    calificacion,
-    anotaciones
-  ) {
+  constructor(id, alumno, fecha, asignatura, calificacion, anotaciones) {
     this.id = id;
     this.alumno = alumno;
     this.fecha = fecha;
