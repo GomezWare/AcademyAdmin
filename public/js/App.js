@@ -36,6 +36,7 @@ class App {
         callback(arrAlumnos);
       })
       .catch((error) => {
+        console.log(error);
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
@@ -345,17 +346,17 @@ class App {
       });
   }
 
-  mostrarTablaExamen(arrExamen) {
+  mostrarTablaExamen(arrExamenes) {
     // Esta funcion borra el cuerpo de la tabla actual y representa los Examenes
     document.querySelector("#listaExamenes").innerHTML = "";
 
     // En caso de que no haya alumnos que representar se le hara saber al usuario
-    if (arrExamen.length == 0) {
+    if (arrExamenes.length == 0) {
       document.querySelector("#listaAlumnos").innerHTML =
         "<tr><td colspan='4'>No se han encontrado examenes</td></tr>";
     } else {
       // Si hay Examenes estos se mostraran por pantalla
-      arrExamen.forEach((examen) => {
+      arrExamenes.forEach((examen) => {
         /* Para obtener el TR con los datos del examen y 
         las funciones se hace uso de la fucnion examenToRow de la clase Examen */
         document
@@ -474,6 +475,35 @@ class App {
         } else {
           createToast("No se ha podido eliminar el Examen", "error");
         }
+      });
+  }
+
+  construirSelectAñadirExamen() {
+    /* Esta funcion obtiene todos los alumnos de la base de datos para representarlos en un select*/
+
+    fetch("../../php/tablaAlumnos/listarAlumnos.php")
+      .then((response) => response.json())
+      .then((JSONalumnos) => {
+        let select = document.querySelector("#selectAlumnos");
+        select.innerHTML = "";
+
+        if (JSONalumnos.length === 0) {
+          throw new Error("alumnosEmpty");
+        } else {
+          JSONalumnos.forEach((e) => {
+            let option = document.createElement("OPTION");
+            option.innerText = e.student_name;
+            option.setAttribute("id", e.student_id);
+            select.appendChild(option);
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        createToast(
+          "No se pueden mostrar alumnos, la tabla Alumnos esta vacia",
+          "error"
+        );
       });
   }
 }

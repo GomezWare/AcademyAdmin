@@ -25,6 +25,31 @@
     <!-- Dialog para añadir examenes -->
     <dialog id="dAñadirExamen">
       <form id="formAñadirExamenes">
+        <label for="alumno">
+          Alumno Examinado:
+          <select name="alumno" id="selectAlumnos"></select>
+        </label>
+        <br />
+        <label for="fecha">
+          Fecha del examen:
+          <input type="date" name="fecha" readonly />
+        </label>
+        <br />
+        <label for="asignatura">
+          Asignatura:
+          <input type="text" name="asignatura" readonly />
+        </label>
+        <br />
+        <label for="calificacion">
+          Calificacion:
+          <input type="number" name="calificacion" readonly />
+        </label>
+        <br />
+        <label for="anotaciones">
+          Anotaciones:
+          <textarea name="anotaciones" cols="20" rows="5" readonly></textarea>
+        </label>
+        <br />
         <button type="button" id="btnAñadirExamen">Añadir Examen</button>
         <button type="button" id="btnAñadirCerrar">Cerrar</button>
       </form>

@@ -74,9 +74,22 @@ document.querySelector("#btnEliminar").addEventListener("click", () => {
   // Una vez se ha completado se cierra la ventana
   document.querySelector("#dEliminarExamen").close();
 });
+
 // Evento para cuando se pulsa el boton añadir examenes
+document
+  .querySelector("#btnAbrirDialogAñadirExamen")
+  .addEventListener("click", () => {
+    // Se recuperan los alumnos utilizando el fetch de la tabla Alumnos (Esto se hace para mostrar los posibles alumnos a calificar)
+    aManager.construirSelectAñadirExamen();
+    // Se muestra el formulario para añadir examenes
+    document.querySelector("#dAñadirExamen").showModal();
+  });
 
 // Evento para cuando se pulsa el boton cerrar de el dialog para añadir examenes
+
+document.querySelector("#btnAñadirCerrar").addEventListener("click", () => {
+  document.querySelector("#dAñadirExamen").close();
+});
 
 // Evento por si se decide añadir el examen en el dialog para añadir el examen
 
