@@ -15,15 +15,16 @@ CREATE TABLE IF NOT EXISTS students (
 SQL;
 
 
-/* Codigo SQL de la tabla students */
+/* Codigo SQL de la tabla exams */
 $examSQL = <<<SQL
 CREATE TABLE IF NOT EXISTS exams (
     exam_id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INTEGER,
     exam_date DATE,
+    exam_subject VARCHAR(50),
     exam_grade INTEGER CHECK(exam_grade >= 0 AND exam_grade <= 10),
     exam_notes VARCHAR(256),
-    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 SQL;
 /* En el SQL de examenes se realiza un check de la nota de los examenes 

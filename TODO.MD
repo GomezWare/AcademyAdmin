@@ -16,7 +16,6 @@ TODO TOASTS
 
 ### BACKEND
 
-TODO PHP Ver examenes
 TODO PHP Añadir examen
 TODO PHP Modificar Examen
 TODO PHP Eliminar Examen
