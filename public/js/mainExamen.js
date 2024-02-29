@@ -34,13 +34,11 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
       return;
     }
     if (funcion == "borrar") {
-      // Aqui se abre en el dialog el nombre del examen
-
       // Se guarda el id del examen en una variable global
+      idAEliminar = id;
 
-      // Mostrar el dialogo de confirmacion
-      alert(id + funcion);
-
+      // Mostrar el dialogo para borrar examenes
+      document.querySelector("#dEliminarExamen").showModal();
       return;
     }
     if (funcion == "modificar") {
@@ -61,9 +59,21 @@ document.querySelector("#btnCerrarDetalles").addEventListener("click", () => {
 });
 
 // Evento para cerrar el dialog de eliminar examen
+document
+  .querySelector("#btnCancelarEliminacion")
+  .addEventListener("click", () => {
+    document.querySelector("#dEliminarExamen").close();
 
+    createToast("No se ha eliminado ningun Examen", "warning");
+  });
 // Evento por si se decide borrar a un examen
+document.querySelector("#btnEliminar").addEventListener("click", () => {
+  // Se recupera el id desde el xData y este es mandado a la funcion eliminar
+  aManager.eliminarExamen(idAEliminar);
 
+  // Una vez se ha completado se cierra la ventana
+  document.querySelector("#dEliminarExamen").close();
+});
 // Evento para cuando se pulsa el boton añadir examenes
 
 // Evento para cuando se pulsa el boton cerrar de el dialog para añadir examenes

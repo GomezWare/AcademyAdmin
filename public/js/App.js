@@ -37,7 +37,6 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
-        console.log(error);
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
@@ -98,7 +97,6 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
-        console.log(error);
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
       });
@@ -211,11 +209,8 @@ class App {
 
         if (error == "server") {
           createToast("Ha ocurrido un error en el servidor", "error");
-          console.log("Error servidor");
         } else {
           createToast("No se ha podido eliminar al Alumno", "error");
-
-          console.log("Error al eliminar");
         }
       });
   }
@@ -306,8 +301,6 @@ class App {
       })
       .catch((error) => {
         createToast("No se ha podido modificar al Alumno", "error");
-
-        console.log(error);
       });
   }
 
@@ -347,7 +340,6 @@ class App {
       })
       .catch((error) => {
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
-        console.log(error);
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaExamen([]);
       });
@@ -420,7 +412,6 @@ class App {
       })
       .catch((error) => {
         // Manejar errores de la solicitud
-        console.log(error);
         if (error == "server") {
           createToast("Ha ocurrido en error en el servidor", "error");
         } else {
@@ -435,12 +426,54 @@ class App {
 
     let formDetalles =
       document.querySelector("#dDatosExamen").firstElementChild;
-      
+
     formDetalles[0].value = Number(examen.id);
     formDetalles[1].value = String(examen.alumno["nombre"]);
     formDetalles[2].value = String(examen.fecha);
     formDetalles[3].value = String(examen.asignatura);
     formDetalles[4].value = Number(examen.calificacion);
     formDetalles[5].value = String(examen.anotaciones);
+  }
+
+  eliminarExamen(id) {
+    /* Esta funcion elimina a examen, no tiene callback */
+
+    fetch("../../php/tablaExamenes/eliminarExamen.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "id=" + encodeURIComponent(id),
+    })
+      .then((response) => {
+        // Aqui se verifica si el servidor ha respondido
+        if (!response.ok) {
+          throw new Error("server");
+        }
+        // Aqui se devuelve dicho JSON
+        return response.json();
+      })
+      .then((resultado) => {
+        if (resultado.estado == "ok") {
+          createToast(
+            "Se ha eliminado el Examen con id " + id + " Correctamente",
+            "success"
+          );
+
+          /*Se refresca la lista de Examenes*/
+          this.obtenerExamenes(this.mostrarTablaExamen);
+        } else {
+          throw new Error("notErased");
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+        console.log(error);
+        if (error == "server") {
+          createToast("Ha ocurrido un error en el servidor", "error");
+        } else {
+          createToast("No se ha podido eliminar el Examen", "error");
+        }
+      });
   }
 }
