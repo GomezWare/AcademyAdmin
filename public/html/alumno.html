@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestionar Alumnos</title>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <!-- Librerias JS de funciones auxiliares -->
     <script defer src="../js/Toasts.js"></script>
-    <script defer src="../js/Alumno.js"></script>
+    <script defer src="../js/navbar.js"></script>
+
+    <!-- Librerias principales -->
     <script defer src="../js/App.js"></script>
+    <script defer src="../js/Alumno.js"></script>
     <script defer src="../js/mainAlumno.js"></script>
+
+    <!-- Framework CSS -->
     <link rel="stylesheet" href="../css/water.css" />
+
+    <!-- Hojas de estilo adicionales -->
     <link rel="stylesheet" href="../css/toast.css" />
     <link rel="stylesheet" href="../css/style.css" />
   </head>
@@ -95,12 +103,29 @@
     </dialog>
 
     <!--Navbar-->
+    <nav class="navbar">
+      <img id="aInicio" src="../img/logo.png" class="logo" alt="LOGO" />
+      <div class="enlaces">
+        <button id="aAlumnos">🎓 Gestionar Alumnos</button>
+        <button id="aExamenes">📄 Gestionar Examenes</button>
+      </div>
 
+      <button id="btnMenuMovil">
+        <img width="36" src="../img/iconosPagina/menu.png" />
+      </button>
+    </nav>
+
+    <!-- Menu para el modo movil-->
+    <div id="enlaces-movil" class="enlaces-movil oculto" >
+      <button id="aAlumnosM">🎓 Gestionar Alumnos</button>
+      <button id="aExamenesM">📄 Gestionar Examenes</button>
+    </div>
     <!-- Parte principal de la pagina -->
 
-    <details>
+    <details class="listadoParam">
       <summary>
-        <img width="16" src="../img/param.png" /> Listado Parametrizado
+        <img width="16" src="../img/iconosPagina/param.png" /> Listado
+        Parametrizado
       </summary>
       <form id="formFiltrarAlumnos">
         <label for="nombre">Nombre: <input type="text" name="nombre" /></label>
@@ -111,7 +136,8 @@
       </form>
     </details>
     <button id="btnAbrirDialogAñadirAlumno">
-      <img width="24" src="../img/añadirAlumno.png" /> Añadir Alumno
+      <img width="24" src="../img/iconosPagina/añadirAlumno.png" /> Añadir
+      Alumno
     </button>
     <table border="1" id="tablaAlumnos">
       <tr>

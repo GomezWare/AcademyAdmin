@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>index Page:</h1>
-    <br>
-    <a href="public/html/alumno.html">Start</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academy Manager</title>
+    <link rel="shortcut icon" href="public/img/favicon.png" type="image/x-icon" />
+    <!-- Librerias JS de funciones auxiliares -->
+    <script defer src="public/js/navbar.js"></script>
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="public/css/water.css" />
+    <!-- Hojas de estilo adicionales -->
+    <link rel="stylesheet" href="public/css/style.css" />
+  </head>
+  <body>
+    <!--Navbar-->
+    <nav class="navbar">
+      <img id="aInicio" src="public/img/logo.png" class="logo" alt="LOGO" />
+      <div class="enlaces">
+        <button id="aAlumnos">🎓 Gestionar Alumnos</button>
+        <button id="aExamenes">📄 Gestionar Examenes</button>
+      </div>
+
+      <button id="btnMenuMovil">
+        <img width="36" src="public/img/iconosPagina/menu.png" />
+      </button>
+    </nav>
+
+    <!-- Menu para el modo movil-->
+    <div id="enlaces-movil" class="enlaces-movil oculto">
+      <button id="aAlumnosM">🎓 Gestionar Alumnos</button>
+      <button id="aExamenesM">📄 Gestionar Examenes</button>
+    </div>
+    <!-- Parte principal de la pagina -->
+  </body>
 </html>

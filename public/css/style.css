@@ -1,11 +1,19 @@
 /* Este fichero CSS incluye algunos estilos adicionales */
 
+/* Tales como 
+- Navbar
+- Landing page
+- Divisiones para el control de errores
+- Adaptaciones del framework WaterCSS
+*/
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Estilos para la division de errores */
 .divErrores {
   margin-top: 1rem;
   background-color: rgb(196, 80, 80);
@@ -15,4 +23,70 @@
 
 .divErrores ul {
   margin-top: 0.3rem;
+}
+
+/* Estilos para el listado parametrizado */
+
+.listadoParam {
+  margin-top: 4.8rem;
+}
+
+/* Estilos de la navbar */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #334458;
+  height: 4rem;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.enlaces {
+  color: whitesmoke;
+  text-decoration: none;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+#btnMenuMovil {
+  display: none;
+}
+
+.enlaces-movil {
+  display: contents;
+  padding-top: 4rem;
+  padding-left: 0.4rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #4a6380;
+}
+
+.oculto {
+  display: none;
+}
+
+.logo {
+  width: 8rem;
+}
+
+.logo:hover {
+  width: 9rem;
+}
+
+/* Media query para la responsividad de la navbar */
+
+@media only screen and (max-width: 650px) {
+  .enlaces {
+    display: none;
+  }
+
+  #btnMenuMovil {
+    display: contents;
+  }
 }
