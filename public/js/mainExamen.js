@@ -10,6 +10,54 @@ var idAlumnoAModificar = -1;
 //////////////
 // Functions
 /////////////
+const validarExamen = (
+  alumno,
+  fecha,
+  asignatura,
+  calificacion,
+  anotaciones
+) => {
+  let arrErrores = Array();
+
+  // Comprobaciones del id alumno
+
+  if (!(Number.isInteger(alumno) && alumno >= 0)) {
+    arrErrores.push("Error en el ID");
+  }
+
+  // Validaciones de la fecha de nacimiento
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+    arrErrores.push("La fecha del examen no concuerda");
+  }
+
+  const valFecha = new Date(fecha);
+  if (isNaN(valFecha.getTime())) {
+    arrErrores.push("La fecha que se ha introducido es erronea");
+  } else {
+    if (valFecha.getFullYear() <= 1900 || valFecha.getFullYear() >= 2099) {
+      arrErrores.push("El año debe estar entre 1900 y 2099");
+    }
+  }
+
+  // Validaciones de la Asignatura
+  if (!asignatura || asignatura.length < 4 || asignatura.length > 50) {
+    arrErrores.push("La asignatura debe tener entre 4 y 50 caracteres");
+  }
+
+  //  Validaciones de la Calificacion
+  if (calificacion < 0 || calificacion > 10) {
+    arrErrores.push("La calificación debe estar entre 0 y 10");
+  }
+
+  // Validaciones de las Anotaciones
+  if (anotaciones.length < 2 || anotaciones.length > 256) {
+    arrErrores.push("Las anotaciones deben estar entre 2 y 256 caracteres");
+  }
+
+  // Se devuelven los errores
+  return arrErrores;
+};
 
 ///////////
 // Events
@@ -51,6 +99,7 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
 
       // Se muestran los datos actuales del alumno en el formulario
       aManager.buscarExamen(idAModificar, aManager.mostrarModificarExamen);
+
       return;
     }
   }
@@ -109,9 +158,17 @@ document.querySelector("#btnAñadirExamen").addEventListener("click", () => {
   let calificacion = Number(form[3].value);
   let anotaciones = String(form[4].value);
 
-  // TODO Validar Datos
+  // Validacion de datos
 
-  if (true) {
+  let errores = validarExamen(
+    alumno,
+    fecha,
+    asignatura,
+    calificacion,
+    anotaciones
+  );
+
+  if (errores.length == 0) {
     // Si no hay errores se sigue
     let examen = new Examen(
       -1,
@@ -156,9 +213,16 @@ document.querySelector("#btnModificarExamen").addEventListener("click", () => {
   let calificacion = Number(form[3].value);
   let anotaciones = String(form[4].value);
 
-  // TODO Validacion de datos
+  // Validacion de datos
+  let errores = validarExamen(
+    idAlumnoAModificar,
+    fecha,
+    asignatura,
+    calificacion,
+    anotaciones
+  );
 
-  if (true) {
+  if (errores.length == 0) {
     // Si no hay errores se sigue
     let examen = new Examen(
       idAModificar,

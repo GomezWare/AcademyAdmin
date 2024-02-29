@@ -39,7 +39,7 @@ const validarAlumno = (nombre, bd, telefono, address) => {
     errores.push("La fecha que se ha introducido es erronea");
   } else {
     if (valFecha.getFullYear() <= 1900 || valFecha.getFullYear() >= 2099) {
-      errores.push("El año no es correcto");
+      errores.push("El año debe estar entre 1900 y 2099");
     }
   }
 
