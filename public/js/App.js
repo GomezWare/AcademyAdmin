@@ -36,7 +36,6 @@ class App {
         callback(arrAlumnos);
       })
       .catch((error) => {
-        console.log(error);
         // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
         createToast("Ha ocurrido un error en el servidor", "error");
         this.mostrarTablaAlumnos([]);
@@ -469,7 +468,6 @@ class App {
       })
       .catch((error) => {
         // Manejar errores de la solicitud
-        console.log(error);
         if (error == "server") {
           createToast("Ha ocurrido un error en el servidor", "error");
         } else {
@@ -499,7 +497,6 @@ class App {
         }
       })
       .catch((error) => {
-        console.log(error);
         createToast(
           "No se pueden mostrar alumnos, la tabla Alumnos esta vacia",
           "error"
@@ -526,7 +523,7 @@ class App {
       .then((data) => {
         // Manejardor de errores
         if (data["estado"] == "ok") {
-          // Se actualiza y se introduce el alumno a la DB mediante PHP y se actualiza la lista
+          // Se actualiza y se introduce el examen a la DB mediante PHP y se actualiza la lista
           createToast("Alumno añadido correctamente", "success");
 
           this.obtenerExamenes(this.mostrarTablaExamen);
@@ -541,6 +538,57 @@ class App {
       })
       .catch((error) => {
         createToast("No se ha podido añadir el Examen", "error");
+      });
+  }
+
+  mostrarModificarExamen(examen) {
+    /* Recibe como parametro un objeto examen, simplemente va navegando
+    por el DOM del formulario ubicado en el DIALOG para modificar examenes 
+    y le va poniendo sus respectivos valores 
+    con la intencion de que el usuario los modifique, salvo el ID que se guarda en la variable 
+    global*/
+    let formModificar =
+      document.querySelector("#dModificarExamen").firstElementChild;
+
+    // Tambien se guarda en la variable global el id del alumno, este es el que realmente se mandara
+    idAlumnoAModificar = Number(examen.alumno["id"]);
+
+    formModificar[0].value = String(examen.alumno["nombre"]);
+    formModificar[1].value = String(examen.fecha);
+    formModificar[2].value = String(examen.asignatura);
+    formModificar[3].value = Number(examen.calificacion);
+    formModificar[4].value = String(examen.anotaciones);
+  }
+
+  modificarExamen(Examen) {
+    // Funcion encargada de modificar los datos de un examen de la DB a partir de un objeto Examen
+
+    fetch("../../php/tablaExamenes/modificarExamen.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Examen),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          createToast("Error en la red", "error");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Manejador de errores
+        if (data["estado"] == "ok") {
+          // Se actualiza y se modifica el examen de la DB mediante PHP y se actualiza la lista
+          createToast("Examen modificado correctamente", "success");
+
+          this.obtenerExamenes(this.mostrarTablaExamen);
+        } else {
+          createToast("No se ha podido modificar el Examen", "error");
+        }
+      })
+      .catch((error) => {
+        createToast("No se ha podido modificar el Examen", "error");
       });
   }
 }

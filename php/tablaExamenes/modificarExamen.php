@@ -1,5 +1,5 @@
 <?php
-/* Este script se encarga de añadir examenes a la base de datos y devolver un JSON con el estado */
+/* Este script se encarga de modificar examenes de la base de datos y devolver un JSON con el estado */
 
 // Recibir datos JSON
 $json_data = file_get_contents('php://input');
@@ -14,14 +14,15 @@ if ($Examen === null && json_last_error() !== JSON_ERROR_NONE) {
     echo json_encode(array('estado' => 'ErrorJSON'));
     die();
 }
-// Funcion para validar datos
 
+// Funcion para validar datos
 
 // funcion para verificar si el alumno existe en la tabla Alumnos
 function studentExists($db, $student_id)
 {
     $stmt = $db->prepare("SELECT COUNT(*) FROM students WHERE student_id = :student_id");
-    $stmt->execute([$student_id]);
+    $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->execute();
     return $stmt->fetchColumn() > 0;
 }
 
@@ -32,7 +33,7 @@ function studentExists($db, $student_id)
 try {
     $db = new PDO('sqlite:' . '../../basedatos/bd.sqlite');
 
-    // Verificar si el alumno existe antes de la inserción
+    // Verificar si el alumno existe antes de la actualizacion de datos
     if (!studentExists($db, $Examen['alumno'])) {
         header('Content-Type: application/json');
         echo json_encode(array('estado' => "errorAlumno"));
@@ -40,7 +41,7 @@ try {
     }
 
     // Se hace un PreparedQuery que se ejecutara en la BD
-    $query = "INSERT INTO exams (student_id, exam_date, exam_subject, exam_grade, exam_notes) VALUES (:student_id, :exam_date, :exam_subject, :exam_grade, :exam_notes);";
+    $query = "UPDATE exams SET student_id = :student_id , exam_date = :exam_date , exam_subject = :exam_subject , exam_grade = :exam_grade , exam_notes = :exam_notes WHERE exam_id = :exam_id;";
     $stmt = $db->prepare($query);
     // Se bindean los atributos y se ejecuta la query
     $stmt->bindParam(':student_id', $Examen['alumno'], PDO::PARAM_INT);
@@ -48,9 +49,8 @@ try {
     $stmt->bindParam(':exam_subject', $Examen['asignatura'], PDO::PARAM_STR);
     $stmt->bindParam(':exam_grade', $Examen['calificacion'], PDO::PARAM_INT);
     $stmt->bindParam(':exam_notes', $Examen['anotaciones'], PDO::PARAM_STR);
+    $stmt->bindParam(':exam_id', $Examen['id'], PDO::PARAM_INT);
 
-
-    //$ok = 
     $ok = $stmt->execute();
 
     // Se comprueba que se ha insertado el examen
@@ -59,7 +59,7 @@ try {
         echo json_encode(array('estado' => 'ok'));
         die();
     } else {
-        throw new PDOException("Examen no insertado");
+        throw new PDOException("Examen no actualizado");
     }
 } catch (PDOException $e) {
     // Manejo de excepciones DB

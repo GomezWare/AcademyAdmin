@@ -5,6 +5,7 @@
 /////////////////////
 var idAEliminar = -1;
 var idAModificar = -1;
+var idAlumnoAModificar = -1;
 
 //////////////
 // Functions
@@ -42,13 +43,14 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
       return;
     }
     if (funcion == "modificar") {
-      // Aqui se abre el DIALOG para modificar examenes
+      // Aqui se abre el DIALOG para modificar alumnos
+      document.querySelector("#dModificarExamen").showModal();
 
-      // Se guarda el id del examen en una variable global
+      // Se guarda el id del alumno en una variable global
+      idAModificar = id;
 
-      // Se muestran los datos actuales del examen en el formulario
-      alert(id + funcion);
-
+      // Se muestran los datos actuales del alumno en el formulario
+      aManager.buscarExamen(idAModificar, aManager.mostrarModificarExamen);
       return;
     }
   }
@@ -108,7 +110,7 @@ document.querySelector("#btnAñadirExamen").addEventListener("click", () => {
   let anotaciones = String(form[4].value);
 
   // TODO Validar Datos
-  console.log(alumno, fecha, asignatura, calificacion, anotaciones);
+
   if (true) {
     // Si no hay errores se sigue
     let examen = new Examen(
@@ -133,8 +135,52 @@ document.querySelector("#btnAñadirExamen").addEventListener("click", () => {
 });
 
 // Evento para cerrar el dialog Modificar Examenes
+document.querySelector("#btnModificarCerrar").addEventListener("click", () => {
+  document.querySelector("#dModificarExamen").close();
+  const divErrores = (document.querySelector(
+    "#divErroresModificar"
+  ).firstElementChild.innerHTML = "");
+  createToast("No se ha modificado ningun Examen", "warning");
+});
 
 // Evento por si se decide Modificar el examen en el DIALOG para modificar el examen
+document.querySelector("#btnModificarExamen").addEventListener("click", () => {
+  const divErrores = document.querySelector(
+    "#divErroresModificar"
+  ).firstElementChild;
+
+  let form = document.querySelector("#formModificarExamen");
+
+  let fecha = String(form[1].value);
+  let asignatura = String(form[2].value);
+  let calificacion = Number(form[3].value);
+  let anotaciones = String(form[4].value);
+
+  // TODO Validacion de datos
+
+  if (true) {
+    // Si no hay errores se sigue
+    let examen = new Examen(
+      idAModificar,
+      idAlumnoAModificar,
+      fecha,
+      asignatura,
+      calificacion,
+      anotaciones
+    );
+
+    aManager.modificarExamen(examen);
+    document.querySelector("#dModificarExamen").close();
+  } else {
+    // Si hay errores se muestran al usuario
+    divErrores.innerHTML = "";
+    errores.forEach((error) => {
+      let e = document.createElement("LI");
+      e.innerText = error;
+      divErrores.appendChild(e);
+    });
+  }
+});
 
 // Evento para el boton de filtrar Examenes
 
