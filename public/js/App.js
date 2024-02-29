@@ -337,8 +337,6 @@ class App {
             e.exam_notes
           );
 
-          console.log(examen);
-
           arrExamenes.push(examen);
         });
 
@@ -373,5 +371,76 @@ class App {
           .appendChild(examen.examenToRow());
       });
     }
+  }
+
+  buscarExamen(id, callback) {
+    /* Esta funcion obtiene a base de un id el registro con los datos de un examen */
+    /* Como parametros esta el id del examen a buscar y la funcion de callback a ejecutar */
+
+    // Realizar la solicitud Fetch POST, el id se mandara en forma de URL
+    fetch("../../php/tablaExamenes/obtenerExamen.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "id=" + encodeURIComponent(id),
+    })
+      .then((response) => {
+        // Aqui se verifica si el servidor ha respondido
+        if (!response.ok) {
+          throw new Error("server");
+        }
+        // Aqui se devuelve dicho JSON
+        return response.json();
+      })
+      .then((JSONExamen) => {
+        /* En caso de que el servidor devuelva la peticion con un 
+        id == -1 significa que el examen no existe en la base de datos por lo que se mostrara un error 
+        Esto no deberia ocurrir nunca pero se maneja el error */
+
+        if (JSONExamen.exam_id == -1) {
+          throw new Error("notFound");
+        } else {
+          const alumno = {
+            id: JSONExamen.student_id,
+            nombre: JSONExamen.student_name,
+          };
+
+          let examen = new Examen(
+            JSONExamen.exam_id,
+            alumno,
+            JSONExamen.exam_date,
+            JSONExamen.exam_subject,
+            JSONExamen.exam_grade,
+            JSONExamen.exam_notes
+          );
+          // Funcion de callback
+          callback(examen);
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la solicitud
+        console.log(error);
+        if (error == "server") {
+          createToast("Ha ocurrido en error en el servidor", "error");
+        } else {
+          createToast("No se ha encontrado el Examen", "error");
+        }
+      });
+  }
+
+  mostrarDetallesAlumno(examen) {
+    /* Recibe como parametro un objeto alumno, simplemente va navegando
+    por el DOM del formulario ubicado en el DIALOG y le va poniendo sus respectivos valores */
+
+    let formDetalles =
+      document.querySelector("#dDatosExamen").firstElementChild;
+      
+    formDetalles[0].value = Number(examen.id);
+    formDetalles[1].value = String(examen.alumno["nombre"]);
+    formDetalles[2].value = String(examen.fecha);
+    formDetalles[3].value = String(examen.asignatura);
+    formDetalles[4].value = Number(examen.calificacion);
+    formDetalles[5].value = String(examen.anotaciones);
   }
 }

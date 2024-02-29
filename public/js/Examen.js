@@ -18,7 +18,7 @@ class Examen {
     let row = document.createElement("tr");
     let nombreTd = document.createElement("td");
     nombreTd.innerText = this.alumno["nombre"];
-    nombreTd.setAttribute("data-id", this.alumno["id"]);
+    nombreTd.setAttribute("data-idExamen", this.id);
 
     let asignaturaTd = document.createElement("td");
     asignaturaTd.innerText = this.asignatura;

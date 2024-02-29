@@ -22,12 +22,15 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
     let funcion = e.target.name;
     // Se obtiene el id de la tabla
     let id = Number(
-      e.target.parentElement.parentElement.children[0].getAttribute("data-id")
+      e.target.parentElement.parentElement.children[0].getAttribute(
+        "data-idExamen"
+      )
     );
 
     if (funcion == "detalles") {
       // Aqui se ejecuta la funcion buscar examenes con la que se abren los detalles del examen y se le pasa el id
-      alert(id + funcion);
+      aManager.buscarExamen(id, aManager.mostrarDetallesAlumno);
+      document.querySelector("#dDatosExamen").showModal();
       return;
     }
     if (funcion == "borrar") {
@@ -53,6 +56,9 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
   }
 });
 // Evento para cerrar el dialog de los detalles
+document.querySelector("#btnCerrarDetalles").addEventListener("click", () => {
+  document.querySelector("#dDatosExamen").close();
+});
 
 // Evento para cerrar el dialog de eliminar examen
 

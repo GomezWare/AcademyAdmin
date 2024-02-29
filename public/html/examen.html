@@ -36,7 +36,37 @@
     <!-- Dialog para ver los detalles de un examen -->
 
     <dialog id="dDatosExamen">
-      <form id="formDatosExamen"></form>
+      <form id="formDatosExamen">
+        <label for="idExamen">
+          ID del examen:
+          <input type="number" name="idExamen" readonly />
+        </label>
+        <br />
+        <label for="alumno">
+          Alumno Examinado:
+          <input type="text" name="alumno" readonly />
+        </label>
+        <br />
+        <label for="fecha">
+          Fecha del examen:
+          <input type="date" name="fecha" readonly />
+        </label>
+        <br />
+        <label for="asignatura">
+          Asignatura:
+          <input type="text" name="asignatura" readonly />
+        </label>
+        <br />
+        <label for="calificacion">
+          Calificacion:
+          <input type="number" name="calificacion" readonly />
+        </label>
+        <br />
+        <label for="anotaciones">
+          Anotaciones:
+          <textarea name="anotaciones" cols="20" rows="5" readonly></textarea>
+        </label>
+      </form>
       <button id="btnCerrarDetalles">Cerrar</button>
     </dialog>
 
