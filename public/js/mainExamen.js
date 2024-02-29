@@ -30,7 +30,7 @@ document.querySelector("#tablaExamenes").addEventListener("click", (e) => {
 
     if (funcion == "detalles") {
       // Aqui se ejecuta la funcion buscar examenes con la que se abren los detalles del examen y se le pasa el id
-      aManager.buscarExamen(id, aManager.mostrarDetallesAlumno);
+      aManager.buscarExamen(id, aManager.mostrarDetallesExamen);
       document.querySelector("#dDatosExamen").showModal();
       return;
     }

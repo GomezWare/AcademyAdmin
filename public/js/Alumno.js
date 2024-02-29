@@ -43,11 +43,6 @@ class Alumno {
     btnModificar.title = "Modificar al Alumno";
     btnModificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/opcionesTabla/modificar.png' />`;
 
-    let btnCalificar = document.createElement("button");
-    btnCalificar.name = "calificar";
-    btnCalificar.title = "Añadir una calificion";
-    btnCalificar.innerHTML = `<img width='24' style="pointer-events:none;" src='../img/opcionesTabla/calificacion.png' />`;
-
     // Se añaden los elementos mediante appendChild
     row.appendChild(idTd);
     row.appendChild(nameTd);
@@ -56,7 +51,6 @@ class Alumno {
     optTd.appendChild(btnDetalles);
     optTd.appendChild(btnBorrar);
     optTd.appendChild(btnModificar);
-    optTd.appendChild(btnCalificar);
 
     // Se devuelve el TR
     return row;

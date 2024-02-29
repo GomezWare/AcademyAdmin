@@ -4,7 +4,6 @@
 
 ### FRONTEND
 
-TODO Añadir examen desde Alumno
 TODO Listado Parametrizado
 
 ## Landing
