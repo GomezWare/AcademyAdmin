@@ -615,16 +615,20 @@ class App {
           let examenAsignatura = examen.asignatura.toLowerCase();
           let filtroAsignatura = filtros["asignatura"].toLowerCase();
 
+          // Si la asignatura coincide
           if (examenAsignatura.includes(filtroAsignatura)) {
             if (filtros["alumno"] == examen.alumno["id"]) {
+              // Si el id del alumno coincide
               if (filtros["suspenso"] == "true" && examen.calificacion < 5) {
+                // Si el examen esta suspenso
                 arrExamenes.push(examen);
               }
               if (filtros["suspenso"] == "false" && examen.calificacion >= 5) {
+                // Si el examen esta aprobado
                 arrExamenes.push(examen);
               }
-              console.log(filtros["suspenso"] == "todo");
               if (filtros["suspenso"] == "todo") {
+                // Si no se quiere filtrar por las calificaciones
                 arrExamenes.push(examen);
               }
             }

@@ -15,8 +15,8 @@ const validarAlumno = (nombre, bd, telefono, address) => {
   let errores = Array();
 
   // Validaciones del nombre
-  if (nombre.length == 0 || nombre.length < 6) {
-    errores.push("El nombre del alumno es demasiado corto minimo 5 caracteres");
+  if (nombre.length == 0 || nombre.length < 3) {
+    errores.push("El nombre del alumno es demasiado corto minimo 3 caracteres");
   }
 
   if (nombre.length > 50) {
