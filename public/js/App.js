@@ -476,13 +476,13 @@ class App {
       });
   }
 
-  construirSelectAñadirExamen() {
+  construirSelect(idSelect) {
     /* Esta funcion obtiene todos los alumnos de la base de datos para representarlos en un select*/
 
     fetch("../../php/tablaAlumnos/listarAlumnos.php")
       .then((response) => response.json())
       .then((JSONalumnos) => {
-        let select = document.querySelector("#selectAlumnos");
+        let select = document.querySelector(idSelect);
         select.innerHTML = "";
 
         if (JSONalumnos.length === 0) {
@@ -589,6 +589,50 @@ class App {
       })
       .catch((error) => {
         createToast("No se ha podido modificar el Examen", "error");
+      });
+  }
+
+  obtenerExamenesFiltrados(filtros, callback) {
+    /* Esta funcion obtiene todos los examenes de la base de datos, y los filtras*/
+
+    fetch("../../php/tablaExamenes/listarExamenes.php")
+      .then((response) => response.json())
+      .then((JSONExamen) => {
+        let arrExamenes = [];
+        // Luego recorre el objeto JSON recibido y va instanciando Examenes y metiendolos en un array si cumplen las condiciones
+        JSONExamen.forEach((e) => {
+          const alumno = { id: e.student_id, nombre: e.student_name };
+
+          let examen = new Examen(
+            e.exam_id,
+            alumno,
+            e.exam_date,
+            e.exam_subject,
+            e.exam_grade,
+            e.exam_notes
+          );
+
+          let examenAsignatura = examen.asignatura.toLowerCase();
+          let filtroAsignatura = filtros["asignatura"].toLowerCase();
+
+          if (examenAsignatura.includes(filtroAsignatura)) {
+            if (filtros["alumno"] == examen.alumno["id"]) {
+              if (filtros["suspenso"] == "true" && examen.calificacion < 5) {
+                arrExamenes.push(examen);
+              }
+              if (filtros["suspenso"] == "false" && examen.calificacion >= 5) {
+                arrExamenes.push(examen);
+              }
+            }
+          }
+        });
+
+        callback(arrExamenes);
+      })
+      .catch((error) => {
+        // En caso de que haya un error en la aplicacion se mostrara un toast y la tabla vacia
+        createToast("Ha ocurrido un error en el servidor", "error");
+        this.mostrarTablaExamen([]);
       });
   }
 }

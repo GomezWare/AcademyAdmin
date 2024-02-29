@@ -82,7 +82,7 @@ document
   .querySelector("#btnAbrirDialogAñadirExamen")
   .addEventListener("click", () => {
     // Se recuperan los alumnos utilizando el fetch de la tabla Alumnos (Esto se hace para mostrar los posibles alumnos a calificar)
-    aManager.construirSelectAñadirExamen();
+    aManager.construirSelect("#selectAlumnos");
     // Se muestra el formulario para añadir examenes
     document.querySelector("#dAñadirExamen").showModal();
   });
@@ -183,8 +183,30 @@ document.querySelector("#btnModificarExamen").addEventListener("click", () => {
 });
 
 // Evento para el boton de filtrar Examenes
+document.querySelector("#btnFiltrarAlumnos").addEventListener("click", () => {
+  let form = document.querySelector("#formFiltrarExamenes");
+  let alumno = Number(form[0].value);
+  let asignatura = String(form[1].value);
+  let suspenso = form[2].value;
+
+  // Se establecen un array asociativo con los filtros
+  let filtros = new Array();
+  filtros["alumno"] = alumno;
+  filtros["asignatura"] = asignatura;
+  filtros["suspenso"] = suspenso;
+
+  // Se ejecuta la funcion para filtrar los Examenes
+  aManager.obtenerExamenesFiltrados(filtros, aManager.mostrarTablaExamen);
+});
 
 // Evento para reiniciar filtros
+document.querySelector("#btnReiniciar").addEventListener("click", () => {
+  let form = document.querySelector("#formFiltrarExamenes");
+  form[1].value = "";
+
+  // Se reincia la tabla
+  aManager.obtenerExamenes(aManager.mostrarTablaExamen);
+});
 
 //////////
 // Main
@@ -193,3 +215,6 @@ document.querySelector("#btnModificarExamen").addEventListener("click", () => {
 /* Se instancia aManager que es la App principal y se muestran todos los examenes de la DB*/
 let aManager = new App();
 aManager.obtenerExamenes(aManager.mostrarTablaExamen);
+
+// Se construye el select de filtros
+aManager.construirSelect("#selectAlumnosFiltrar");

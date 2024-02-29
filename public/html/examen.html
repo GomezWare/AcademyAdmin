@@ -193,6 +193,22 @@
         Parametrizado
       </summary>
       <form id="formFiltrarExamenes">
+        <label for="alumno">
+          Alumno:
+          <select name="alumno" id="selectAlumnosFiltrar"></select>
+        </label>
+        <label for="materia">
+          Asignatura:
+          <input type="text" name="materia" />
+        </label>
+        <label for="calificacion">
+          Calificacion:
+          <select name="calificacion">
+            <option value="true">Suspenso</option>
+            <option value="false">Aprobado</option>
+          </select>
+        </label>
+        <br />
         <button type="button" id="btnFiltrarAlumnos">Filtrar Examenes</button>
         <button type="button" id="btnReiniciar">Reiniciar Filtros</button>
       </form>

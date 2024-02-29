@@ -219,7 +219,6 @@ document.querySelector("#btnModificarAlumno").addEventListener("click", () => {
 
 // Evento para el boton de filtrar Alumnos
 document.querySelector("#btnFiltrarAlumnos").addEventListener("click", () => {
-  let divErrores = document.querySelector("#divErroresFiltar");
   let form = document.forms[3];
   let nombre = String(form.children[0].firstElementChild.value);
   let telefono = Number(form.children[1].firstElementChild.value);
