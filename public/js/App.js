@@ -623,6 +623,10 @@ class App {
               if (filtros["suspenso"] == "false" && examen.calificacion >= 5) {
                 arrExamenes.push(examen);
               }
+              console.log(filtros["suspenso"] == "todo");
+              if (filtros["suspenso"] == "todo") {
+                arrExamenes.push(examen);
+              }
             }
           }
         });
