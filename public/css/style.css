@@ -59,7 +59,10 @@
 
 .enlaces-movil {
   display: contents;
-  padding-top: 4rem;
+  position: fixed;
+  top: 4rem;
+  right: 2.5rem;
+  padding-top: 0.4rem;
   padding-left: 0.4rem;
   display: flex;
   justify-content: center;
@@ -88,5 +91,12 @@
 
   #btnMenuMovil {
     display: contents;
+  }
+}
+
+/* Media query por si redimensiona la ventana con el menu abierto */
+@media only screen and (min-width: 650px) {
+  .enlaces-movil {
+    display: none;
   }
 }
