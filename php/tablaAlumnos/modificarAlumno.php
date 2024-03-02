@@ -35,7 +35,7 @@ function validacionDeDatos($Alumno)
         $isOk = false;
     } else {
         $year = date('Y', strtotime($Alumno['bd']));
-        if ($year < 1950 || $year > 2099) {
+        if ($year < 1900 || $year > 2099) {
             // El año está fuera del rango
             $isOk = false;
         }
