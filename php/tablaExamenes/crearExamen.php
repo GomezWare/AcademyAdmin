@@ -14,7 +14,6 @@ if ($Examen === null && json_last_error() !== JSON_ERROR_NONE) {
     echo json_encode(array('estado' => 'ErrorJSON'));
     die();
 }
-// Funcion para validar datos
 
 
 // funcion para verificar si el alumno existe en la tabla Alumnos
@@ -25,6 +24,11 @@ function studentExists($db, $student_id)
     return $stmt->fetchColumn() > 0;
 }
 
+// Funcion para validar datos
+function validarDatos()
+{
+    
+}
 // TODO Comprobacion de datos
 
 
