@@ -25,7 +25,7 @@ const validarExamen = (
     arrErrores.push("Error en el ID");
   }
 
-  // Validaciones de la fecha de nacimiento
+  // Validaciones de la fecha del examen
 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
     arrErrores.push("La fecha del examen no concuerda");

@@ -25,11 +25,49 @@ function studentExists($db, $student_id)
 }
 
 // Funcion para validar datos
-function validarDatos()
+function validacionDeDatos($Examen)
 {
-    
+    $isOk = true;
+
+    // Validaciones de la fecha del examen
+    if (!isset($Examen['fecha']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $Examen['fecha'])) {
+        $arrErrores[] = "La fecha del examen no concuerda";
+    }
+
+    $valFecha = strtotime($Examen['fecha']);
+    if ($valFecha === false) {
+        $isOk = false;
+    } else {
+        $anio = date('Y', $valFecha);
+        if ($anio <= 1900 || $anio >= 2099) {
+            $isOk = false;
+        }
+    }
+
+    // Validaciones de la asigunatura
+    if (!isset($Examen['asignatura']) || empty($Examen['asignatura']) || strlen($Examen['asignatura']) < 4 || strlen($Examen['asignatura']) > 50) {
+        $isOk = false;
+    }
+
+    // Validacion de la calificacion
+    if (!isset($Examen['calificacion']) || !is_numeric($Examen['calificacion']) || $Examen['calificacion'] < 0 || $Examen['calificacion'] > 10) {
+        $isOk = false;
+    }
+
+    // Validaciones de las Anotaciones
+    if (!isset($Examen['anotaciones']) || strlen($Examen['anotaciones']) < 2 || strlen($Examen['anotaciones']) > 256) {
+        $isOk = false;
+    }
+
+    return $isOk;
 }
-// TODO Comprobacion de datos
+//  Comprobacion de datos
+if (!validacionDeDatos($Examen)) {
+    // Si falla la validacion
+    header('Content-Type: application/json');
+    echo json_encode(array('estado' => "ValidateException"));
+    die();
+}
 
 
 // Conexion PDO
