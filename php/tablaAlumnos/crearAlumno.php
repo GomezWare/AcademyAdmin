@@ -15,7 +15,50 @@ if ($Alumno === null && json_last_error() !== JSON_ERROR_NONE) {
     die();
 }
 
-// TODO Comprobacion de datos
+// Comprobacion de datos
+// Comprobacion de datos
+function validacionDeDatos($Alumno)
+{
+    $isOk = true;
+
+    // Verificacion del nombre
+    if (!isset($Alumno['name']) || strlen($Alumno['name']) < 3 || strlen($Alumno['name']) > 50) {
+        // El nombre está vacío o tiene menos de 3 caracteres o mas de 50
+        $isOk = false;
+    }
+
+    // Verificacion de la fecha
+    if (!isset($Alumno['bd']) || !preg_match("/^\d{4}-\d{2}-\d{2}$/", $Alumno['bd']) || strtotime($Alumno['bd']) === false) {
+        // La fecha no es válida
+        $isOk = false;
+    } else {
+        $year = date('Y', strtotime($Alumno['bd']));
+        if ($year < 1950 || $year > 2099) {
+            // El año está fuera del rango
+            $isOk = false;
+        }
+    }
+
+    // Verificacion del telefono
+    if (isset($Alumno['tel']) && !preg_match("/^[679]\d{8}$/", $Alumno['tel'])) {
+        // El teléfono no es válido
+        $isOk = false;
+    }
+
+    if (isset($Alumno['addr']) && (strlen($Alumno['addr']) < 7 || strlen($Alumno['addr']) > 100)) {
+        // La dirección no es válida
+        $isOk = false;
+    }
+
+    return $isOk;
+}
+
+if (!validacionDeDatos($Alumno)) {
+    // Si falla la validacion
+    header('Content-Type: application/json');
+    echo json_encode(array('estado' => "ValidateException"));
+    die();
+}
 
 
 // Conexion PDO
