@@ -7,6 +7,7 @@ try {
 
     $sqlAlumnos = <<<SQL
     DELETE FROM students;
+    UPDATE sqlite_sequence SET seq=0 WHERE name=students;
     INSERT INTO students (student_name, student_bd, student_tel, student_address) VALUES ("Marta Maria, Toro", "2001-04-17" ,621234567 ,"Calle Primavera, 123" );
     INSERT INTO students (student_name, student_bd, student_tel, student_address) VALUES ("Gemma Araujo,", "2002-09-05" ,734567890 ,"Calle del Sol, 456" );
     INSERT INTO students (student_name, student_bd, student_tel, student_address) VALUES ("Kevin, Rodrigues", "2003-11-20" ,965432178 ,"Calle de la Luna, 789" );
@@ -20,6 +21,7 @@ try {
     SQL;
     $sqlExamen = <<<SQL
     DELETE FROM exams;
+    UPDATE sqlite_sequence SET seq=0 WHERE name=exams;
     INSERT INTO exams (student_id, exam_date, exam_subject, exam_grade, exam_notes) VALUES (1, "2023-02-19", "Matematicas", 6, "Bastante Mejorable");
     INSERT INTO exams (student_id, exam_date, exam_subject, exam_grade, exam_notes) VALUES (1, "2023-10-07", "Lenguaje", 4, "Varios fallos en el ejecicio sintactico");
     INSERT INTO exams (student_id, exam_date, exam_subject, exam_grade, exam_notes) VALUES (2, "2023-02-19", "Matematicas", 7, "Muy bien!");
