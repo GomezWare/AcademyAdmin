@@ -43,8 +43,8 @@
   flex-direction: column;
 }
 
-.card img{
-width: 16rem;
+.card img {
+  width: 16rem;
 }
 
 .card p {
@@ -96,6 +96,28 @@ width: 16rem;
   display: none;
 }
 
+#aGithub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5rem;
+}
+
+#aGithub img {
+  pointer-events: none;
+}
+
+#aGithubM {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+#aGithubM img {
+  pointer-events: none;
+}
+
 .enlaces-movil {
   display: contents;
   position: fixed;
@@ -123,7 +145,7 @@ width: 16rem;
 
 /* Media query para la responsividad de la navbar */
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 750px) {
   .enlaces {
     display: none;
   }
@@ -134,7 +156,7 @@ width: 16rem;
 }
 
 /* Media query por si redimensiona la ventana con el menu abierto */
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 750px) {
   .enlaces-movil {
     display: none;
   }
